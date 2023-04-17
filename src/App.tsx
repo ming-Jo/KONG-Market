@@ -1,10 +1,10 @@
 import React from "react";
-import TopNavbar from "@components/navbar/TopNavbar";
+import Header from "@components/header/Header";
 
 const App = () => {
   return (
     <div className="App">
-      <TopNavbar />
+      <Header />
       <h1 className="text-2xl font-bold underline">Hello world!</h1>
     </div>
   );

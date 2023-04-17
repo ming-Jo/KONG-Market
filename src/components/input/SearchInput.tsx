@@ -2,8 +2,8 @@ import React from "react";
 
 const SearchInput = () => {
   return (
-    <form className="my-[2.2rem]">
-      <fieldset className="flex justify-between items-center w-[40rem] px-[2.2rem] py-[1rem] bg-light-choco rounded-full border-2 border-main-choco">
+    <form className="w-[40rem] my-[2.2rem]">
+      <fieldset className="flex justify-between items-center px-[2.2rem] py-[1rem] bg-light-choco rounded-full border-2 border-main-choco">
         <legend className="sr-only">상품 검색</legend>
         <label htmlFor="searchInp" className="sr-only"></label>
         <input

@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoginButton = () => {
+const LoginHeaderButton = () => {
   return (
     <button type="button" className="text-[1.2rem] text-dark-gray">
       <img
@@ -13,4 +13,4 @@ const LoginButton = () => {
   );
 };
 
-export default LoginButton;
+export default LoginHeaderButton;
