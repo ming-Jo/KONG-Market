@@ -6,7 +6,7 @@ const ShoppingCartButton = () => {
       <img
         src="src/assets/icon-shopping-cart.svg"
         alt=""
-        className="w-full h-[3.2rem] mb-2 pr-[0.3rem]"
+        className="w-full h-[3.2rem] mb-2"
       />
       장바구니
     </button>
