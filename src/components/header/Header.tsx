@@ -1,8 +1,7 @@
 import React from "react";
 import Logo from "@components/button/Logo";
 import SearchInput from "@components/input/SearchInput";
-import LoginHeaderButton from "@components/button/LoginHeaderButton";
-import ShoppingCartButton from "@components/button/ShoppingCartButton";
+import HeaderIconButton from "@components/button/HeaderIconButton";
 
 const Header = () => {
   return (
@@ -13,8 +12,12 @@ const Header = () => {
           <SearchInput />
         </div>
         <div className="flex gap-[2.6rem] shrink-0">
-          <ShoppingCartButton />
-          <LoginHeaderButton />
+          <HeaderIconButton iconSrc="src/assets/icon-shopping-cart.svg">
+            장바구니
+          </HeaderIconButton>
+          <HeaderIconButton iconSrc="src/assets/icon-user.svg">
+            로그인
+          </HeaderIconButton>
         </div>
       </div>
     </header>
