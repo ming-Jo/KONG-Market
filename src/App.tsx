@@ -1,13 +1,21 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "@components/header/Header";
 
-const App = () => {
+export const App = () => {
   return (
-    <div className="App">
+    <>
       <Header />
-      <h1 className="text-2xl font-bold underline">Hello world!</h1>
-    </div>
+      <Outlet />
+    </>
   );
 };
 
-export default App;
+export const SellerApp = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
+};
