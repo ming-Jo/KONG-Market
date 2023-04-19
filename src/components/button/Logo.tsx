@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "@/assets/logo-kong.svg";
 
 const Logo = () => {
   return (
     <h1 className="shrink-0">
-      <img src="src/assets/logo-kong.svg" alt="KONG Market 로고 이미지" />
+      <img src={logo} alt="KONG Market 로고 이미지" />
     </h1>
   );
 };
