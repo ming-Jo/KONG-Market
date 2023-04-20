@@ -2,8 +2,8 @@ import React from "react";
 import Logo from "@components/button/Logo";
 import SearchInput from "@components/input/SearchInput";
 import HeaderIconButton from "@components/button/HeaderIconButton";
-import iconShoppingCart from "@/assets/icon-shopping-cart.svg";
-import iconUser from "@/assets/icon-user.svg";
+import iconShoppingCart from "@assets/icon-shopping-cart.svg";
+import iconUser from "@assets/icon-user.svg";
 
 const Header = () => {
   return (
