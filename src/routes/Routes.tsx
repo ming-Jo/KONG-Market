@@ -1,16 +1,16 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { App, SellerApp } from "@/App";
-import Home from "@/pages/Home/Home";
-import Cart from "@/pages/Cart/Cart";
-import Detail from "@/pages/Details/Detail";
-import Payment from "@/pages/Payment/Payment";
-import Mypage from "@/pages/Mypage/Mypage";
-import SellerCenter from "@/pages/Seller/SellerCenter";
-import Upload from "@/pages/Seller/Upload";
-import Login from "@/pages/Login/Login";
-import SignUp from "@/pages/SignUp/SignUp";
-import NotFound from "@/pages/NotFound/NotFound";
+import Home from "@pages/Home/Home";
+import Cart from "@pages/Cart/Cart";
+import Detail from "@pages/Details/Detail";
+import Payment from "@pages/Payment/Payment";
+import Mypage from "@pages/Mypage/Mypage";
+import SellerCenter from "@pages/Seller/SellerCenter";
+import Upload from "@pages/Seller/Upload";
+import Login from "@pages/Login/Login";
+import SignUp from "@pages/SignUp/SignUp";
+import NotFound from "@pages/NotFound/NotFound";
 
 export const router = createBrowserRouter([
   {
