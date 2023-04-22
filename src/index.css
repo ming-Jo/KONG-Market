@@ -10,3 +10,15 @@
     font-size: 10px;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply py-[1.6rem] px-[2rem] bg-main-choco text-white text-[1.6rem] rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  }
+  .btn-login-tap {
+    @apply py-[1.6rem] px-[2rem] bg-white text-[1.8rem] rounded-lg border border-[black] border-b hover:bg-light-choco focus:outline-none focus:bg-light-choco;
+  }
+  .input-underline {
+    @apply max-w-[48rem] px-[1rem] py-[2rem] text-[1.6rem] border-b-2 border-main-choco;
+  }
+}
