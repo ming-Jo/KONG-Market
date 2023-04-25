@@ -7,6 +7,7 @@ export default {
         "main-choco": "#8C5637",
         "light-choco": "#ffebd9",
         "dark-gray": "#767676",
+        current: "currentColor",
       },
       fontFamily: {
         spoqa: ["Spoqa Han Sans Neo", "sans-serif"],
