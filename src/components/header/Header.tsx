@@ -14,10 +14,12 @@ const Header = () => {
           <SearchInput />
         </div>
         <div className="flex gap-[2.6rem] shrink-0">
-          <HeaderIconButton iconSrc={iconShoppingCart}>
+          <HeaderIconButton to="/cart" iconSrc={iconShoppingCart}>
             장바구니
           </HeaderIconButton>
-          <HeaderIconButton iconSrc={iconUser}>로그인</HeaderIconButton>
+          <HeaderIconButton to="/login" iconSrc={iconUser}>
+            로그인
+          </HeaderIconButton>
         </div>
       </div>
     </header>

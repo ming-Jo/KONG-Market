@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "@assets/logo-kong.svg";
+import { Link } from "react-router-dom";
 
 interface LogoProps {
   logoSize: "small" | "big";
@@ -7,13 +8,14 @@ interface LogoProps {
 
 const Logo = ({ ...props }: LogoProps) => {
   return (
-    <h1
+    <Link
+      to="/"
       className={`${
         props.logoSize === "big" ? "w-[24rem] mx-auto mt-[10rem] mb-[7rem]" : ""
-      } shrink-0`}
+      } shrink-0 block`}
     >
       <img src={logo} alt="KONG Market 로고 이미지" className="w-full" />
-    </h1>
+    </Link>
   );
 };
 
