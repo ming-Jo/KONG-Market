@@ -11,7 +11,7 @@ const CommonButton = ({ children, ...props }: CommonBtnProps) => {
   return (
     <button
       {...props}
-      className={`px-[1rem] py-[1.8rem] rounded-[0.5rem] bg-main-choco text-white ${
+      className={`px-[3.2rem] py-[1.6rem] rounded-[0.5rem] text-[1.6rem] text-white bg-main-choco ${
         props.className || ""
       }`}
     >

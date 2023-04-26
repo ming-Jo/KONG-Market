@@ -11,8 +11,8 @@ const LoginForm = () => {
         <LoginTapButton active={true}>구매회원 로그인</LoginTapButton>
         <LoginTapButton active={false}>판매회원 로그인</LoginTapButton>
       </div>
-      <form>
-        <fieldset className="flex flex-col rounded-b-[1rem] border-r border-l border-b border-main-choco">
+      <form className="rounded-b-[1rem] border-r border-l border-b border-main-choco">
+        <fieldset className="flex flex-col">
           <legend className="sr-only">login form</legend>
           <label htmlFor="userId" className="sr-only">
             아이디
@@ -20,7 +20,7 @@ const LoginForm = () => {
           <input
             type="text"
             id="userId"
-            placeholder="아이디를 입력하세요"
+            placeholder="아이디"
             className="input-underline"
           />
           <label htmlFor="userPw" className="sr-only">
@@ -29,11 +29,11 @@ const LoginForm = () => {
           <input
             type="password"
             id="userPw"
-            placeholder="비밀번호를 입력하세요"
+            placeholder="비밀번호"
             className="input-underline"
           />
           <CommonButton
-            type="button"
+            type="submit"
             className="w-[48rem] my-[3.6rem] text-[1.8rem] mx-auto"
           >
             로그인
