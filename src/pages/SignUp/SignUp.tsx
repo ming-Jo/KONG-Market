@@ -1,7 +1,14 @@
 import React from "react";
+import Logo from "@components/button/Logo";
+import SignupForm from "@components/form/SignupForm";
 
 const SignUp = () => {
-  return <div>SignUp</div>;
+  return (
+    <>
+      <Logo logoSize="big" />
+      <SignupForm />
+    </>
+  );
 };
 
 export default SignUp;

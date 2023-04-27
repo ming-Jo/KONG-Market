@@ -16,8 +16,8 @@ const SignupForm = () => {
         <LoginTapButton active={false}>판매회원가입</LoginTapButton>
       </div>
       <form className="flex flex-col items-center">
-        <fieldset className="flex flex-col p-[4rem] rounded-b-[1rem] border-r border-l border-b border-main-choco">
-          <legend className="sr-only">Sign Up form</legend>
+        <fieldset className="flex flex-col w-full p-[4rem] rounded-b-[1rem] border-r border-l border-b border-main-choco">
+          <legend className="sr-only">회원가입 양식</legend>
           <label htmlFor="userId" className="mb-4 text-[1.6rem] text-dark-gray">
             아이디
           </label>
@@ -39,6 +39,7 @@ const SignupForm = () => {
             type="password"
           />
           <InvalidSpan children="비밀번호가 일치하지 않습니다." />
+          <CommonLabelInput children="이름" id="userName" type="text" />
         </fieldset>
         <CommonButton
           type="submit"
