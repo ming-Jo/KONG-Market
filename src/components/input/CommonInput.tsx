@@ -3,6 +3,8 @@ import React from "react";
 interface CommonInputProps {
   type: string;
   id?: string;
+  defaultValue?: string;
+  name?: string;
   placeholder?: string;
   className?: string;
 }
@@ -27,6 +29,8 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
     <input
       type={props.type}
       id={props.id}
+      defaultValue={props.defaultValue}
+      name={props.name}
       placeholder={props.placeholder}
       className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] text-[1.6rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ""
