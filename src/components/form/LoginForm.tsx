@@ -7,7 +7,7 @@ const LoginForm = () => {
   return (
     <section className="flex flex-col mx-auto w-[55rem] relative">
       <h2 className="sr-only">로그인 화면</h2>
-      <div className="flex text-main-choco font-medium">
+      <div className="flex font-medium text-main-choco">
         <LoginTapButton active={true}>구매회원 로그인</LoginTapButton>
         <LoginTapButton active={false}>판매회원 로그인</LoginTapButton>
       </div>
@@ -21,6 +21,7 @@ const LoginForm = () => {
             type="text"
             id="userId"
             placeholder="아이디"
+            required
             className="input-underline"
           />
           <label htmlFor="userPw" className="sr-only">
@@ -30,6 +31,7 @@ const LoginForm = () => {
             type="password"
             id="userPw"
             placeholder="비밀번호"
+            required
             className="input-underline"
           />
           <CommonButton
