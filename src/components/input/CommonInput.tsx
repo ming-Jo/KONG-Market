@@ -7,6 +7,7 @@ interface CommonInputProps {
   name?: string;
   placeholder?: string;
   className?: string;
+  required?: boolean;
 }
 
 interface CommonLabelInputProps {
@@ -15,6 +16,7 @@ interface CommonLabelInputProps {
   id?: string;
   placeholder?: string;
   autocomplete?: string;
+  required?: boolean;
   labelClassName?: string;
   inputClassName?: string;
 }
@@ -32,6 +34,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       defaultValue={props.defaultValue}
       name={props.name}
       placeholder={props.placeholder}
+      required={props.required}
       className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] text-[1.6rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ""
       }`}
@@ -55,6 +58,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         id={props.id}
         placeholder={props.placeholder}
         autoComplete={props.autocomplete}
+        required={props.required}
         className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] text-[1.6rem]  invalid:outline-red-400 valid:outline-green-300 ${
           props.inputClassName || ""
         }`}
@@ -66,7 +70,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
 export const InvalidSpan = ({ children, ...props }: InvalidSpanProps) => {
   return (
     <span
-      className={`hidden peer-invalid:block mt-2 text-red-400 ${
+      className={`hidden peer-invalid:block mt-2 text-[1.2rem] text-red-400 ${
         props.className || ""
       }`}
     >
