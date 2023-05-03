@@ -35,7 +35,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       name={props.name}
       placeholder={props.placeholder}
       required={props.required}
-      className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] text-[1.6rem] invalid:outline-red-400 valid:outline-green-300 ${
+      className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ""
       }`}
     />
@@ -47,9 +47,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
     <>
       <label
         htmlFor={props.id}
-        className={`mt-5 mb-4 text-[1.6rem] text-dark-gray ${
-          props.labelClassName || ""
-        }`}
+        className={`mt-5 mb-4 text-dark-gray ${props.labelClassName || ""}`}
       >
         {props.children}
       </label>
@@ -59,7 +57,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         placeholder={props.placeholder}
         autoComplete={props.autocomplete}
         required={props.required}
-        className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] text-[1.6rem]  invalid:outline-red-400 valid:outline-green-300 ${
+        className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
           props.inputClassName || ""
         }`}
       />
