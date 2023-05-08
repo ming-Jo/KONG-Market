@@ -1,10 +1,11 @@
-import React, { Children } from "react";
+import { useState } from "react";
 import { CommonInput } from "@components/input/CommonInput";
 import iconUpArrow from "@assets/icon-up-arrow.svg";
 import iconDownArrow from "@assets/icon-down-arrow.svg";
 
 interface DomainListItemProps {
   children: React.ReactNode;
+  emailValue?: String;
 }
 
 const DomainListItem = ({ ...props }: DomainListItemProps) => {
@@ -20,7 +21,24 @@ const DomainListItem = ({ ...props }: DomainListItemProps) => {
   );
 };
 
+const DomainListUl = () => {
+  return (
+    <ul className="gray-scroll absolute top-[6rem] w-full max-h-[15rem] overflow-y-scroll bg-white border border-dark-gray rounded-[0.5rem] shadow-[0_0_3px_0_rgba(0,0,0,0.2)]">
+      <DomainListItem children="google.com" />
+      <DomainListItem children="naver.com" />
+      <DomainListItem children="daum.net" />
+      <DomainListItem children="nate.com" />
+    </ul>
+  );
+};
+
 const EmailInput = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const handleBtnToggle = () => {
+    !toggle ? setToggle(true) : setToggle(false);
+  };
+
   return (
     <div className="w-[47rem] mt-5 text-dark-gray">
       <label htmlFor="userEmail">이메일</label>
@@ -34,15 +52,22 @@ const EmailInput = () => {
         @
         <div className="relative">
           <CommonInput type="text" name="emailDomain" />
-          <div className="absolute top-0 right-0 p-[1.6rem] cursor-pointer">
-            <img src={iconUpArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />
-          </div>
-          <ul className="gray-scroll absolute top-[6rem] w-full max-h-[15rem] overflow-y-scroll bg-white border border-dark-gray rounded-[0.5rem] shadow-[0_0_3px_0_rgba(0,0,0,0.2)]">
-            <DomainListItem children="google.com" />
-            <DomainListItem children="naver.com" />
-            <DomainListItem children="daum.net" />
-            <DomainListItem children="nate.com" />
-          </ul>
+          <button
+            type="button"
+            onClick={handleBtnToggle}
+            className="absolute top-0 right-0 p-[1.6rem]"
+          >
+            {toggle ? (
+              <img
+                src={iconDownArrow}
+                alt=""
+                className="w-[2.4rem] h-[2.4rem]"
+              />
+            ) : (
+              <img src={iconUpArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />
+            )}
+          </button>
+          {toggle ? <DomainListUl /> : null}
         </div>
       </div>
     </div>
