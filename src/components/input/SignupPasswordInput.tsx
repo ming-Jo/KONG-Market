@@ -20,12 +20,6 @@ const SignupPasswordInput = () => {
         inputClassName="invalid:bg-[url('/src/assets/icon-check-off.svg')] valid:bg-[url('/src/assets/icon-check-on.svg')] bg-no-repeat bg-[42.5rem]"
       />
       <InvalidSpan children="비밀번호가 일치하지 않습니다." />
-      <CommonLabelInput
-        children="이름"
-        id="userName"
-        type="text"
-        labelClassName="pt-10"
-      />
     </>
   );
 };
