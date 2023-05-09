@@ -6,6 +6,7 @@ import iconDownArrow from "@assets/icon-down-arrow.svg";
 interface DomainListItemProps {
   children: React.ReactNode;
   emailValue?: String;
+  onClick?: React.MouseEventHandler;
 }
 
 const DomainListItem = ({ ...props }: DomainListItemProps) => {
@@ -14,6 +15,7 @@ const DomainListItem = ({ ...props }: DomainListItemProps) => {
       <button
         type="button"
         className="w-full px-12 py-4 text-left hover:bg-light-choco"
+        onClick={props.onClick}
       >
         {props.children}
       </button>
@@ -21,19 +23,28 @@ const DomainListItem = ({ ...props }: DomainListItemProps) => {
   );
 };
 
-const DomainListUl = () => {
+const DomainListUl = ({ ...props }) => {
   return (
     <ul className="gray-scroll absolute top-[6rem] w-full max-h-[15rem] overflow-y-scroll bg-white border border-dark-gray rounded-[0.5rem] shadow-[0_0_3px_0_rgba(0,0,0,0.2)]">
-      <DomainListItem children="google.com" />
-      <DomainListItem children="naver.com" />
-      <DomainListItem children="daum.net" />
-      <DomainListItem children="nate.com" />
+      <DomainListItem children="google.com" onClick={props.handleEmailValue} />
+      <DomainListItem children="naver.com" onClick={props.handleEmailValue} />
+      <DomainListItem children="daum.net" onClick={props.handleEmailValue} />
+      <DomainListItem children="nate.com" onClick={props.handleEmailValue} />
     </ul>
   );
 };
 
 const EmailInput = () => {
   const [toggle, setToggle] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
+
+  const handleEmailValue = (event: React.MouseEvent) => {
+    const value = event.currentTarget.textContent;
+    if (value !== null) {
+      setEmailValue(value);
+      setToggle(false);
+    }
+  };
 
   const handleBtnToggle = () => {
     !toggle ? setToggle(true) : setToggle(false);
@@ -51,7 +62,11 @@ const EmailInput = () => {
         />
         @
         <div className="relative">
-          <CommonInput type="text" name="emailDomain" />
+          <CommonInput
+            type="text"
+            name="emailDomain"
+            defaultValue={emailValue}
+          />
           <button
             type="button"
             onClick={handleBtnToggle}
@@ -67,7 +82,7 @@ const EmailInput = () => {
               <img src={iconUpArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />
             )}
           </button>
-          {toggle ? <DomainListUl /> : null}
+          {toggle ? <DomainListUl handleEmailValue={handleEmailValue} /> : null}
         </div>
       </div>
     </div>
