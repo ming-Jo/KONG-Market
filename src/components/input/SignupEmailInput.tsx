@@ -65,6 +65,7 @@ const EmailInput = () => {
           <CommonInput
             type="text"
             name="emailDomain"
+            placeholder="example.com"
             defaultValue={emailValue}
           />
           <button
