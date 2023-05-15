@@ -6,8 +6,9 @@ export default {
       colors: {
         "main-choco": "#8C5637",
         "light-choco": "#ffebd9",
-        "dark-gray": "#767676",
+        "light-gray": "#f2f2f2",
         "disabled-gray": "#C4C4C4",
+        "dark-gray": "#767676",
         current: "currentColor",
       },
       fontFamily: {
