@@ -5,16 +5,14 @@
 @tailwind utilities;
 
 :root {
+  font-family: Spoqa Han Sans Neo, sans-serif;
+  font-size: 10px;
   --main-choco: #8c5637;
   --main-light: #ffebd9;
   --gray: #c4c4c4;
 }
 
 @layer base {
-  * {
-    font-family: Spoqa Han Sans Neo, sans-serif;
-    font-size: 10px;
-  }
   label,
   input,
   a,
@@ -27,9 +25,6 @@
 }
 
 @layer components {
-  .btn-primary {
-    @apply py-[1.6rem] px-[2rem] bg-main-choco text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
-  }
   .btn-login-tap {
     @apply relative basis-0 flex-grow min-w-0 py-[2rem] px-[2rem] bg-white text-[1.8rem] leading-[2rem] rounded-t-[1rem] border-[1px] border-main-choco;
   }
@@ -38,6 +33,15 @@
   }
   .input-underline + label + input {
     @apply mt-[0.6rem];
+  }
+  .footer-list li {
+    @apply relative text-dark-gray;
+  }
+  .footer-list li + li {
+    @apply before:content-[''] before:absolute before:-left-[1.7rem] before:top-1 before:block before:w-[0.1rem] before:h-[1.6rem] before:bg-disabled-gray;
+  }
+  .footer-list li {
+    @apply hover:underline hover:text-black active:font-bold;
   }
 }
 
