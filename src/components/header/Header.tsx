@@ -7,7 +7,7 @@ import iconUser from "@assets/icon-user.svg";
 
 const Header = () => {
   return (
-    <header className="shadow-[0_4px_5px_rgba(0,0,0,0.1)]">
+    <header className="shadow-[0_3px_4px_rgba(0,0,0,0.1)] relative z-50">
       <div className="flex justify-between items-center gap-[3rem] max-w-[138rem] px-16 py-[2.2rem] mx-auto">
         <div className="flex items-center">
           <Logo logoSize="small" />

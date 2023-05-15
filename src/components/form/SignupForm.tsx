@@ -9,7 +9,7 @@ import EmailInput from "@components/input/SignupEmailInput";
 
 const SignupForm = () => {
   return (
-    <section className="flex flex-col mx-auto w-[55rem]">
+    <section className="flex flex-col mx-auto w-[55rem] mb-[10rem]">
       <h2 className="sr-only">회원가입 화면</h2>
       <div className="flex font-medium text-main-choco">
         <LoginTapButton active={true}>구매회원가입</LoginTapButton>
