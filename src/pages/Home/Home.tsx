@@ -4,7 +4,7 @@ import ProductListItem from "@components/contents/ProductListItem";
 
 const Home = () => {
   return (
-    <div className="max-w-[138rem] mx-auto">
+    <main className="max-w-[138rem] mx-auto">
       <Carousel />
       <section className="max-w-[120rem] px-16 py-32 mx-auto">
         <h2 className="sr-only">판매 상품 리스트</h2>
@@ -16,7 +16,7 @@ const Home = () => {
           <ProductListItem />
         </ul>
       </section>
-    </div>
+    </main>
   );
 };
 
