@@ -8,7 +8,7 @@ interface CommonBtnProps {
   disabled?: boolean;
 }
 
-const CommonButton = ({ children, ...props }: CommonBtnProps) => {
+export const CommonButton = ({ children, ...props }: CommonBtnProps) => {
   return (
     <button
       {...props}
@@ -22,4 +22,15 @@ const CommonButton = ({ children, ...props }: CommonBtnProps) => {
   );
 };
 
-export default CommonButton;
+export const DetailMenuButton = ({ children, ...props }: CommonBtnProps) => {
+  return (
+    <button
+      type="button"
+      className={`w-full py-8 border-b-[0.6rem] b-disabled-gray ${
+        props.className || ""
+      }`}
+    >
+      {children}
+    </button>
+  );
+};
