@@ -1,6 +1,6 @@
 import React from "react";
 import LoginTapButton from "@components/button/LoginTapButton";
-import CommonButton from "@components/button/CommonButton";
+import { CommonButton } from "@components/button/CommonButton";
 import { CommonLabelInput } from "@components/input/CommonInput";
 import IDInput from "@components/input/SignupIDInput";
 import PasswordInput from "@components/input/SignupPasswordInput";

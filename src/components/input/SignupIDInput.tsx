@@ -1,6 +1,6 @@
 import React from "react";
 import { CommonInput, InvalidSpan } from "@components/input/CommonInput";
-import CommonButton from "@components/button/CommonButton";
+import { CommonButton } from "@components/button/CommonButton";
 
 const SignupIDInput = () => {
   return (

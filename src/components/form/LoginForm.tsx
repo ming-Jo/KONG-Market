@@ -1,6 +1,6 @@
 import React from "react";
 import LoginTapButton from "@components/button/LoginTapButton";
-import CommonButton from "@components/button/CommonButton";
+import { CommonButton } from "@components/button/CommonButton";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
