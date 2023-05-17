@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { App, SellerApp } from "@/App";
 import Home from "@pages/Home/Home";
 import Cart from "@pages/Cart/Cart";
-import Detail from "@pages/Details/Detail";
+import Detail from "@pages/Detail/Detail";
 import Payment from "@pages/Payment/Payment";
 import Mypage from "@pages/Mypage/Mypage";
 import SellerCenter from "@pages/Seller/SellerCenter";
