@@ -51,7 +51,7 @@ const EmailInput = () => {
   };
 
   return (
-    <div className="w-[47rem] mt-5 text-dark-gray">
+    <div className="mt-5 text-dark-gray">
       <label htmlFor="userEmail">이메일</label>
       <div className="flex gap-[1.2rem] text-[1.6rem] mt-4 items-center">
         <CommonInput

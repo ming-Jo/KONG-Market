@@ -23,6 +23,7 @@ interface CommonLabelInputProps {
 
 interface InvalidSpanProps {
   children: React.ReactNode;
+  invalid?: boolean;
   className?: string;
 }
 
@@ -35,7 +36,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       name={props.name}
       placeholder={props.placeholder}
       required={props.required}
-      className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
+      className={`w-full p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ""
       }`}
     />
@@ -57,7 +58,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         placeholder={props.placeholder}
         autoComplete={props.autocomplete}
         required={props.required}
-        className={`peer p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
+        className={`p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
           props.inputClassName || ""
         }`}
       />
@@ -68,9 +69,11 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
 export const InvalidSpan = ({ children, ...props }: InvalidSpanProps) => {
   return (
     <span
-      className={`hidden peer-invalid:block mt-2 text-[1.2rem] text-red-400 ${
-        props.className || ""
-      }`}
+      className={`${
+        props.invalid === true
+          ? "hidden"
+          : "block mt-2 text-[1.2rem] text-red-400"
+      } ${props.className || ""}`}
     >
       {children}
     </span>

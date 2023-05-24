@@ -26,7 +26,7 @@
 
 @layer components {
   .btn-login-tap {
-    @apply relative basis-0 flex-grow min-w-0 py-[2rem] px-[2rem] bg-white text-[1.8rem] leading-[2rem] rounded-t-[1rem] border-[1px] border-main-choco;
+    @apply relative basis-0 flex-grow min-w-0 py-[2rem] px-[2rem] bg-white text-[1.8rem] leading-[2rem] rounded-t-[1rem] border border-main-choco;
   }
   .input-underline {
     @apply w-[48rem] px-[1rem] py-[2rem] mx-auto mt-[3.4rem] border-b-2 border-light-choco focus:outline-0 focus:border-main-choco;

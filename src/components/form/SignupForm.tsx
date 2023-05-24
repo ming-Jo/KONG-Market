@@ -16,7 +16,7 @@ const SignupForm = () => {
         <LoginTapButton active={false}>판매회원가입</LoginTapButton>
       </div>
       <form className="flex flex-col items-center">
-        <fieldset className="flex flex-col w-full p-[3.8rem] rounded-b-[1rem] border-r border-l border-b border-main-choco">
+        <fieldset className="flex flex-col p-[3.8rem] border-l border-r border-b border-main-choco rounded-b-[1rem]">
           <legend className="sr-only">회원가입 양식</legend>
           <IDInput />
           <PasswordInput />
@@ -29,7 +29,7 @@ const SignupForm = () => {
           <PhoneInput />
           <EmailInput />
         </fieldset>
-        <div className="flex items-start w-[47rem] m-14 text-dark-gray">
+        <div className="flex m-14 text-dark-gray">
           <input
             type="checkbox"
             id="agree"

@@ -3,7 +3,7 @@ import { CommonInput } from "@components/input/CommonInput";
 
 const PhoneInput = () => {
   return (
-    <div className="w-[47rem] mt-5">
+    <div className="mt-5">
       <label htmlFor="userPhone" className="text-dark-gray">
         휴대폰 번호
       </label>
