@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import LoginTapButton from "@components/button/LoginTapButton";
 import { CommonButton } from "@components/button/CommonButton";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@hooks/hooks";
+import {
+  fetchLogin,
+  getLoginStatus,
+  getLoginUserType,
+} from "@/store/slice/loginSlice";
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
+
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  const [formValue, setFormValue] = useState(initialValues);
+
+  const loginType = useAppSelector(getLoginUserType);
+  const loginStatus = useAppSelector(getLoginStatus);
+
+  useEffect(() => {
+    if (loginStatus === "failed") {
+      console.log("로그인 실패");
+    }
+    if (loginStatus === "success") {
+      setFormValue(initialValues);
+    }
+  }, [loginStatus]);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target;
+    setFormValue({ ...formValue, [id]: value });
+  };
+
+  const handelOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { username, password } = formValue;
+    const userData = {
+      username,
+      password,
+      login_type: loginType,
+    };
+    dispatch(fetchLogin(userData));
+  };
+
   return (
     <section className="flex flex-col mx-auto w-[55rem] relative">
       <h2 className="sr-only">로그인 화면</h2>
@@ -11,28 +54,35 @@ const LoginForm = () => {
         <LoginTapButton active={true}>구매회원 로그인</LoginTapButton>
         <LoginTapButton active={false}>판매회원 로그인</LoginTapButton>
       </div>
-      <form className="rounded-b-[1rem] border-r border-l border-b border-main-choco">
+      <form
+        onSubmit={handelOnSubmit}
+        className="rounded-b-[1rem] border-r border-l border-b border-main-choco"
+      >
         <fieldset className="flex flex-col">
           <legend className="sr-only">login form</legend>
-          <label htmlFor="userId" className="sr-only">
+          <label htmlFor="username" className="sr-only">
             아이디
           </label>
           <input
             type="text"
-            id="userId"
+            id="username"
             placeholder="아이디"
-            required
             className="input-underline"
+            onChange={handleOnChange}
+            value={formValue.username}
+            required
           />
-          <label htmlFor="userPw" className="sr-only">
+          <label htmlFor="password" className="sr-only">
             비밀번호
           </label>
           <input
             type="password"
-            id="userPw"
+            id="password"
             placeholder="비밀번호"
-            required
             className="input-underline"
+            onChange={handleOnChange}
+            value={formValue.password}
+            required
           />
           <CommonButton
             type="submit"
