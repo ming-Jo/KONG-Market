@@ -2,6 +2,10 @@ import { instance } from "@/api/axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/store/store";
 
+const getStorageItem = sessionStorage.getItem("token");
+const TOKEN = getStorageItem ? JSON.parse(getStorageItem).token : null;
+const USER_TYPE = getStorageItem ? JSON.parse(getStorageItem).user_type : null;
+
 interface LoginData {
   username: string;
   password: string;
@@ -9,18 +13,25 @@ interface LoginData {
 }
 
 interface LoginState {
+  token?: string | null;
   userType: string;
   status: string;
+  error: string;
 }
 
 const initialState: LoginState = {
-  userType: "BUYER",
+  token: TOKEN ? TOKEN : null,
+  userType: USER_TYPE ? USER_TYPE : "BUYER",
   status: "nothing",
+  error: "",
 };
 
 export const fetchLogin = createAsyncThunk(
   "login/fetchLogin",
-  async ({ username, password, login_type }: LoginData) => {
+  async (
+    { username, password, login_type }: LoginData,
+    { rejectWithValue }
+  ) => {
     try {
       const data = { username, password, login_type };
       const response = await instance.post("accounts/login/", data);
@@ -30,19 +41,24 @@ export const fetchLogin = createAsyncThunk(
       }
 
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );
+
+// 로그아웃
+export const logout = createAsyncThunk("login/logout", async () => {
+  sessionStorage.clear();
+});
 
 export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
     setUserType: (state, action) => {
-      console.log(state, action);
-
+      console.log(action);
       state.userType = action.payload;
     },
   },
@@ -52,12 +68,33 @@ export const loginSlice = createSlice({
     });
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = "success";
+      state.token = action.payload.token;
     });
-    builder.addCase(fetchLogin.rejected, (state) => {
+    builder.addCase(fetchLogin.rejected, (state, action) => {
       state.status = "failed";
+      if (action.payload) {
+        state.error =
+          (action.payload as string) &&
+          "아이디 또는 패스워드가 일치하지 않습니다.";
+      } else {
+        state.error =
+          action.error.message || "로그인에 실패하였습니다. 다시 시도해주세요.";
+      }
+    });
+    // 로그아웃 시 실행될 리듀서
+    builder.addCase(logout.fulfilled, (state) => {
+      state.status = "nothing";
+      state.token = null;
+      state.userType = "BUYER";
+      state.error = "";
     });
   },
 });
 
+export const getToken = (state: RootState) => state.login.token;
 export const getLoginStatus = (state: RootState) => state.login.status;
 export const getLoginUserType = (state: RootState) => state.login.userType;
+export const getLoginError = (state: RootState) => state.login.error;
+
+console.log(loginSlice.actions);
+console.log(loginSlice);
