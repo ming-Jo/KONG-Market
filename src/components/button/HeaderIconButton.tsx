@@ -5,11 +5,12 @@ interface HeaderIconBtnProps {
   children: React.ReactNode;
   iconSrc: string;
   to: string;
+  color: string;
 }
 
 const HeaderIconButton = ({ ...props }: HeaderIconBtnProps) => {
   return (
-    <Link to={props.to} className="inline-block text-[1.2rem] text-dark-gray">
+    <Link to={props.to} className={`inline-block text-[1.2rem] ${props.color}`}>
       <img src={props.iconSrc} alt="" className="w-full h-[3.2rem] mb-2" />
       {props.children}
     </Link>

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import LoginTapButton from "@components/button/LoginTapButton";
-import { CommonButton } from "@components/button/CommonButton";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@hooks/hooks";
 import {
   fetchLogin,
   getLoginStatus,
   getLoginUserType,
 } from "@/store/slice/loginSlice";
+import ToggleButton from "@components/button/ToggleButton";
+import { CommonButton } from "@components/button/CommonButton";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const initialValues = {
@@ -28,6 +29,7 @@ const LoginForm = () => {
     }
     if (loginStatus === "success") {
       setFormValue(initialValues);
+      navigate("/");
     }
   }, [loginStatus]);
 
@@ -50,10 +52,7 @@ const LoginForm = () => {
   return (
     <section className="flex flex-col mx-auto w-[55rem] relative">
       <h2 className="sr-only">로그인 화면</h2>
-      <div className="flex font-medium text-main-choco">
-        <LoginTapButton active={true}>구매회원 로그인</LoginTapButton>
-        <LoginTapButton active={false}>판매회원 로그인</LoginTapButton>
-      </div>
+      <ToggleButton />
       <form
         onSubmit={handelOnSubmit}
         className="rounded-b-[1rem] border-r border-l border-b border-main-choco"
