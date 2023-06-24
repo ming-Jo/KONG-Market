@@ -1,6 +1,6 @@
 import { instance } from "@/api/axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "@/store/store";
+import { RootState } from "@store/store";
 
 const getStorageItem = sessionStorage.getItem("token");
 const TOKEN = getStorageItem ? JSON.parse(getStorageItem).token : null;

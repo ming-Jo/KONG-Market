@@ -5,7 +5,7 @@ import {
   fetchLogin,
   getLoginStatus,
   getLoginUserType,
-} from "@/store/slice/loginSlice";
+} from "@store/slice/loginSlice";
 import ToggleButton from "@components/button/ToggleButton";
 import { CommonButton } from "@components/button/CommonButton";
 
