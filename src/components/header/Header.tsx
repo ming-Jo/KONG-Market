@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@hooks/hooks";
-import { getLoginUserType, getToken, logout } from "@/store/slice/loginSlice";
+import { getLoginUserType, getToken, logout } from "@store/slice/loginSlice";
 import Logo from "@components/button/Logo";
 import SearchInput from "@components/input/SearchInput";
 import HeaderIconButton from "@components/button/HeaderIconButton";
 import { ReactComponent as IconShoppingCart } from "@assets/icon-shopping-cart.svg";
 import { ReactComponent as IconUser } from "@assets/icon-user.svg";
+import ArrowModal from "@components/modal/ArrowModal";
+import { modalIsOpenState } from "@store/slice/modalSlice";
 
 const Header = () => {
+  const [modal, setModal] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const AuthToken = useAppSelector(getToken);
+  const ModalState = useAppSelector(modalIsOpenState);
+  // const UserType = useAppSelector(getLoginUserType);
+
+  const handleLogout = () => {
+    setModal(false);
+    dispatch(logout());
+    navigate("/");
+  };
+
+  const arrowModalList = [
+    { value: "마이페이지", onClick: () => navigate("/mypage") },
+    { value: "로그아웃", onClick: () => handleLogout() },
+  ];
 
   const cartIconColor = pathname.includes("cart") ? "#8c5637" : "#767676";
   const myPageIconColor = pathname.includes("mypage") ? "#8c5637" : "#767676";
@@ -25,7 +43,7 @@ const Header = () => {
         </div>
         <div className="flex gap-[2.6rem] shrink-0 relative">
           <HeaderIconButton
-            to="/cart"
+            onClick={AuthToken ? () => navigate("/cart") : undefined}
             svg={IconShoppingCart}
             stroke={cartIconColor}
             color={
@@ -35,7 +53,9 @@ const Header = () => {
             장바구니
           </HeaderIconButton>
           <HeaderIconButton
-            to={AuthToken ? "/mypage" : "/login"}
+            onClick={
+              AuthToken ? () => setModal(!modal) : () => navigate("/login")
+            }
             svg={IconUser}
             stroke={myPageIconColor}
             color={
@@ -44,6 +64,7 @@ const Header = () => {
           >
             {AuthToken ? "마이페이지" : "로그인"}
           </HeaderIconButton>
+          <ArrowModal on={modal} list={arrowModalList} />
         </div>
       </div>
     </header>
