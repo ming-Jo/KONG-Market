@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@hooks/hooks";
 import { getLoginUserType, getToken, logout } from "@store/slice/loginSlice";
@@ -12,6 +12,7 @@ import { modalIsOpenState } from "@store/slice/modalSlice";
 
 const Header = () => {
   const [modal, setModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -33,6 +34,22 @@ const Header = () => {
 
   const cartIconColor = pathname.includes("cart") ? "#8c5637" : "#767676";
   const myPageIconColor = pathname.includes("mypage") ? "#8c5637" : "#767676";
+
+  // ArrowModal focus out 시 모달 OFF
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setModal(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="shadow-[0_3px_4px_rgba(0,0,0,0.1)] relative z-50">
@@ -64,7 +81,7 @@ const Header = () => {
           >
             {AuthToken ? "마이페이지" : "로그인"}
           </HeaderIconButton>
-          <ArrowModal on={modal} list={arrowModalList} />
+          <ArrowModal on={modal} list={arrowModalList} refCurrent={modalRef} />
         </div>
       </div>
     </header>
