@@ -1,6 +1,7 @@
 import React from "react";
 import iconSwiperLeft from "@assets/icon-swiper-1.svg";
 import iconSwiperRight from "@assets/icon-swiper-2.svg";
+import DotButtons from "@components/carousel/DotButton";
 
 const Carousel = () => {
   return (
@@ -19,22 +20,10 @@ const Carousel = () => {
         <img src={iconSwiperRight} alt="" />
       </button>
       <div className="absolute flex gap-4 bottom-10 left-1/2 -translate-x-2/4">
-        <button
-          type="button"
-          className="w-4 h-4 bg-current rounded-full"
-        ></button>
-        <button
-          type="button"
-          className="w-4 h-4 bg-current rounded-full"
-        ></button>
-        <button
-          type="button"
-          className="w-4 h-4 bg-current rounded-full"
-        ></button>
-        <button
-          type="button"
-          className="w-4 h-4 bg-current rounded-full"
-        ></button>
+        <DotButtons />
+        <DotButtons />
+        <DotButtons />
+        <DotButtons />
       </div>
     </article>
   );
