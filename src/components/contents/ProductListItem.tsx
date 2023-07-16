@@ -1,19 +1,27 @@
-import React from "react";
+import React, { Children } from "react";
 import { Link } from "react-router-dom";
+import { Product } from "@store/slice/productSlice";
 
-const ProductListItem = () => {
+const ProductListItem = ({ product }: { product: Product }) => {
   return (
     <li className="w-full">
-      <Link to="product/:id">
+      <Link to={`product/${product.product_id}`}>
         <figure>
-          <div className="relative pt-[100%] mb-8 border border-dark-gray rounded-2xl">
-            <img src="" alt="" className="w-full" />
+          <div
+            className={`relative mb-8 border border-dark-gray rounded-2xl overflow-hidden h-0 pt-[100%]`}
+          >
+            <img
+              src={`${product ? product.image : ""}`}
+              alt=""
+              className="absolute top-0 left-0 object-cover h-full"
+            />
           </div>
-          <p className="text-dark-gray">우당탕탕 라이캣의 실험실</p>
+          <p className="text-dark-gray">{product.store_name}</p>
           <figcaption className="text-[1.8rem] mt-4">
-            상품 설명 어쩌구저쩌구
+            {product.product_name}
             <strong className="block text-[2.4rem] mt-4">
-              29,000<span className="ml-2">원</span>
+              {product.price.toLocaleString("ko-KR")}
+              <span className="ml-2">원</span>
             </strong>
           </figcaption>
         </figure>
