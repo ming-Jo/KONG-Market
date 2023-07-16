@@ -13,7 +13,7 @@ const ProductListItem = ({ product }: { product: Product }) => {
             <img
               src={`${product ? product.image : ""}`}
               alt=""
-              className="absolute top-0 left-0 object-cover h-full"
+              className="absolute top-0 left-0 w-full h-full"
             />
           </div>
           <p className="text-dark-gray">{product.store_name}</p>
