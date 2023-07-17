@@ -14,6 +14,9 @@ export default {
       fontFamily: {
         spoqa: ["Spoqa Han Sans Neo", "sans-serif"],
       },
+      boxShadow: {
+        small: "0 0 20px -12px rgba(0, 0, 0, 0.3)",
+      },
     },
   },
   plugins: [],
