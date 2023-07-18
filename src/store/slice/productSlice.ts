@@ -52,7 +52,7 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchProductData.fulfilled, (state, action) => {
       state.status = "success";
-      state.totalPage = action.payload.count / 15;
+      state.totalPage = Math.floor(action.payload.count / 15) + 1;
       state.productList = action.payload.results;
     });
     builder.addCase(fetchProductData.rejected, (state) => {
