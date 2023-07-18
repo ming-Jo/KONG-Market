@@ -19,7 +19,7 @@ const PaginationGroup = ({ totalPage, getPageCount }: PageButtonProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center my-20">
       <LeftArrowButton
         onclick={() => handlePageButton(onPage - 1)}
         disabled={onPage === 1 ? true : false}

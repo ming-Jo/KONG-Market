@@ -10,7 +10,7 @@ const SearchInput = () => {
           type="text"
           id="searchInp"
           placeholder="상품을 검색해보세요!"
-          className="w-full px-[2.2rem] py-[1.2rem] bg-light-choco rounded-full border-2 border-main-choco"
+          className="w-full px-[2.2rem] py-[1.1rem] bg-light-choco rounded-full border-2 border-main-choco"
         />
         <button
           type="button"
