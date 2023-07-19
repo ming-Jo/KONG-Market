@@ -5,6 +5,8 @@ import { RootState } from "@store/store";
 const getStorageItem = sessionStorage.getItem("token");
 const TOKEN = getStorageItem ? JSON.parse(getStorageItem).token : null;
 const USER_TYPE = getStorageItem ? JSON.parse(getStorageItem).user_type : null;
+const USER_NAME =
+  getStorageItem === null ? null : JSON.parse(getStorageItem).username;
 
 interface LoginData {
   username: string;
@@ -14,13 +16,15 @@ interface LoginData {
 
 interface LoginState {
   token?: string | null;
+  userName: string;
   userType: string;
-  status: string;
+  status: string; // nothing | loading | success | faileds
   error: string;
 }
 
 const initialState: LoginState = {
   token: TOKEN ? TOKEN : null,
+  userName: USER_NAME ? USER_NAME : "",
   userType: USER_TYPE ? USER_TYPE : "BUYER",
   status: "nothing",
   error: "",
@@ -37,10 +41,13 @@ export const fetchLogin = createAsyncThunk(
       const response = await instance.post("accounts/login/", data);
 
       if (response.data) {
-        sessionStorage.setItem("token", JSON.stringify(response.data));
+        sessionStorage.setItem(
+          "token",
+          JSON.stringify({ username, ...response.data })
+        );
       }
 
-      return response.data;
+      return { username, ...response.data };
     } catch (error: any) {
       console.log(error);
       return rejectWithValue(error.response.data.FAIL_Message);
@@ -69,6 +76,7 @@ export const loginSlice = createSlice({
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = "success";
       state.token = action.payload.token;
+      state.userName = action.payload.username;
     });
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.status = "failed";
@@ -85,6 +93,7 @@ export const loginSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.status = "nothing";
       state.token = null;
+      state.userName = "";
       state.userType = "BUYER";
       state.error = "";
     });
@@ -94,7 +103,7 @@ export const loginSlice = createSlice({
 export const getToken = (state: RootState) => state.login.token;
 export const getLoginStatus = (state: RootState) => state.login.status;
 export const getLoginUserType = (state: RootState) => state.login.userType;
+export const getAuthState = (state: RootState) => state.login;
 export const getLoginError = (state: RootState) => state.login.error;
 
 console.log(loginSlice.actions);
-console.log(loginSlice);
