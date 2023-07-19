@@ -5,29 +5,27 @@ import iconFacebook from "@assets/icon-fb.svg";
 import iconYoutube from "@assets/icon-yt.svg";
 
 const Footer = () => {
+  const footerList = [
+    "콩마켓 소개",
+    "이용약관",
+    "개인정보처리방침",
+    "전자금융거래약관",
+    "청소년보호정책",
+    "제휴문의",
+  ];
+
   return (
     <footer className="py-16 bg-light-gray">
       <div className="max-w-[138rem] px-20 mx-auto text-[1.4rem]">
         <div className="flex justify-between pb-[2rem] border-b border-disabled-gray">
           <ul className="flex items-center gap-14 footer-list">
-            <li>
-              <Link to="/">콩마켓 소개</Link>
-            </li>
-            <li>
-              <Link to="/">이용약관</Link>
-            </li>
-            <li>
-              <Link to="/">개인정보처리방침</Link>
-            </li>
-            <li>
-              <Link to="/">전자금융거래약관</Link>
-            </li>
-            <li>
-              <Link to="/">청소년보호정책</Link>
-            </li>
-            <li>
-              <Link to="/">제휴문의</Link>
-            </li>
+            {footerList.map((item, index) => (
+              <li key={index}>
+                <Link to="/" className="text-[1.4rem]">
+                  {item}
+                </Link>
+              </li>
+            ))}
           </ul>
           <ul className="flex gap-6">
             <li>
