@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { carouselData } from "@components/carousel/carouselData";
 import {
@@ -9,14 +9,31 @@ import DotButton from "@components/carousel/DotButton";
 
 const Carousel = () => {
   const [carouselIndex, setCarouselIndex] = useState(1);
+  const animationFrameId = useRef<number | null>(null);
+
+  const animate = () => {
+    moveNextImg();
+    animationFrameId.current = requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
-    const autoSlider = setInterval(() => {
-      moveNextImg();
-    }, 6000);
+    let startTime = performance.now();
+    let elapsedTime = 0;
+
+    const controlAnimate = (timestamp: number) => {
+      elapsedTime = timestamp - startTime; // 경과 시간 계산
+      if (elapsedTime >= 6000) {
+        moveNextImg();
+        startTime = timestamp; // 다음 애니메이션 시작 시점 업데이트
+      }
+      animationFrameId.current = requestAnimationFrame(controlAnimate);
+    };
+    animationFrameId.current = requestAnimationFrame(controlAnimate);
 
     return () => {
-      clearInterval(autoSlider);
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
     };
   }, [carouselIndex]);
 
