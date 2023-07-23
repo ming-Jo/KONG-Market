@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useAppSelector } from "@hooks/hooks";
+import { getDetailState } from "@store/slice/detailSlice";
 import { DetailMenuButton } from "@components/button/CommonButton";
 
 const DetailTab = () => {
+  const { detail } = useAppSelector(getDetailState);
   const [selectText, setSelectText] = useState("제품 상세");
 
   const handleSelectTab = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,8 +49,11 @@ const DetailTab = () => {
           </DetailMenuButton>
         </li>
       </ul>
-      <div className="mt-20 bg-light-gray h-[45rem] text-disabled-gray text-5xl font-medium text-center leading-[45rem]">
+      <div className="flex flex-col justify-center mt-20 bg-light-gray h-[45rem] text-disabled-gray text-5xl font-medium text-center h-[45rem]">
         {selectText}
+        {selectText === "제품 상세" && (
+          <p className="py-10">{detail?.product_info}</p>
+        )}
       </div>
     </div>
   );

@@ -1,63 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "@hooks/hooks";
+import { getDetailState } from "@store/slice/detailSlice";
 import { CommonButton } from "@components/button/CommonButton";
+import { ReactComponent as MinusSVG } from "@assets/icon-minus-line.svg";
+import { ReactComponent as PlusSVG } from "@assets/icon-plus-line.svg";
 
 const DetailUiGroup = () => {
+  const { detail } = useAppSelector(getDetailState);
+
   return (
     <>
-      <div className="w-full max-w-[60rem] relative before:block before:pb-[100%] before:bg-light-gray">
+      <div className="w-full max-w-[60rem] relative rounded-3xl overflow-hidden before:block before:pb-[100%] before:bg-light-gray">
         <img
-          src=""
+          src={detail?.image}
           alt="상품 대표이미지"
-          className="absolute top-0 object-cover w-full"
+          className="absolute top-0 object-cover w-full h-full"
         />
       </div>
       <div className="flex flex-col justify-between">
         <div>
           <Link to="/" className="text-[1.8rem] text-dark-gray">
-            판매업체명
+            {detail?.store_name}
           </Link>
           <strong className="block text-[3rem] font-normal mt-4 mb-6">
-            상품 이름 어쩌구저쩌구
+            {detail?.product_name}
           </strong>
           <p className="text-[3rem] font-bold">
-            10,000<span className="pl-1 font-normal">원</span>
+            {detail?.price.toLocaleString("ko-KR")}
+            <span className="pl-1 font-normal">원</span>
           </p>
         </div>
         <div className="flex flex-col gap-[2vh]">
           <p className="pb-6 border-b-2 b-disabled-gray text-dark-gray">
-            택배배송 / 무료배송
+            {detail?.shipping_method === "PARCEL" ? "직접배송" : "택배배송"} /{" "}
+            {detail?.shipping_fee === 0
+              ? "무료배송"
+              : `배송비 ${detail?.shipping_fee.toLocaleString("ko-KR")} 원`}
           </p>
-          <div className="grid grid-cols-3 w-[15rem] h-20 border b-disabled-gray rounded-lg">
+          <div className="grid grid-cols-3 w-[15rem] border b-disabled-gray rounded-lg">
             <button type="button" className="border-r b-disabled-gray">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="#c4c4c4"
-                strokeWidth="2"
-                className="mx-auto"
-              >
-                <path d="M0 10H20" stroke="current"></path>
-              </svg>
+              <MinusSVG className="mx-auto" stroke={"#C4C4C4"} />
             </button>
             <span className="text-center text-[1.8rem] leading-[5rem]">1</span>
             <button type="button" className="border-l b-disabled-gray">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="#c4c4c4"
-                strokeWidth="2"
-                className="mx-auto"
-              >
-                <path d="M0 9.5H20" stroke="current"></path>
-                <path d="M10 20L10 0" stroke="current"></path>
-              </svg>
+              <PlusSVG className="mx-auto" stroke={"#C4C4C4"} />
             </button>
           </div>
           <div className="flex justify-between items-center border-t-2 b-disabled-gray text-[1.8rem] pt-8">
