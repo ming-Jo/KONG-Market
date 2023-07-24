@@ -1,10 +1,10 @@
 import React from "react";
-import AmountButtonBox from "@components/button/AmountButtonBox";
+import QuantityButtonBox from "@components/button/QuantityButtonBox";
 
 const ProductCount = () => {
   return (
     <>
-      <AmountButtonBox />
+      <QuantityButtonBox />
       <div className="flex justify-between items-center border-t-2 b-disabled-gray text-[1.8rem] pt-8">
         <p className="font-medium">총 상품 금액</p>
         <div className="flex items-center text-main-choco">

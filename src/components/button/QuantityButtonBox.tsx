@@ -4,7 +4,7 @@ import {
   PlusCountButton,
 } from "@components/button/CountButton";
 
-const AmountButtonBox = () => {
+const QuantityButtonBox = () => {
   return (
     <div className="grid grid-cols-3 w-[15rem] border b-disabled-gray rounded-lg">
       <MinusCountButton />
@@ -14,4 +14,4 @@ const AmountButtonBox = () => {
   );
 };
 
-export default AmountButtonBox;
+export default QuantityButtonBox;
