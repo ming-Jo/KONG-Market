@@ -5,11 +5,15 @@ import ProductDetail from "@components/details/ProductDetail";
 import ProductCount from "@components/details/ProductCount";
 import { CommonButton } from "@components/button/CommonButton";
 
-const DetailUiGroup = () => {
+interface DetailUiGroupProps {
+  disabled?: boolean;
+}
+
+const DetailUiGroup = ({ disabled }: DetailUiGroupProps) => {
   const { detail } = useAppSelector(getDetailState);
 
   return (
-    <div className="grid w-full grid-cols-2 gap-16">
+    <div className="grid w-full grid-cols-2 gap-16 max-[700px]:grid-cols-1">
       {/* 상품 이미지 */}
       <div className="w-full relative rounded-3xl overflow-hidden before:block before:pb-[100%] before:bg-light-gray">
         <img
@@ -25,8 +29,8 @@ const DetailUiGroup = () => {
         <div className="flex flex-col gap-[2vh] border-t-2 b-disabled-gray pt-[2vh]">
           <ProductCount />
           <div className="grid grid-cols-[2fr_1fr] gap-5">
-            <CommonButton>바로 구매</CommonButton>
-            <CommonButton className="bg-dark-gray">장바구니</CommonButton>
+            <CommonButton disabled={disabled}>바로 구매</CommonButton>
+            <CommonButton disabled={disabled}>장바구니</CommonButton>
           </div>
         </div>
       </div>

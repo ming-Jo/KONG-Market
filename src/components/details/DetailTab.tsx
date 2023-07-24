@@ -14,7 +14,7 @@ const DetailTab = () => {
   };
 
   return (
-    <div className="col-[span_2/auto] mt-[10rem]">
+    <div className="mt-[10rem]">
       <ul className="grid grid-cols-4 text-[1.8rem]">
         <li>
           <DetailMenuButton
@@ -49,10 +49,10 @@ const DetailTab = () => {
           </DetailMenuButton>
         </li>
       </ul>
-      <div className="flex flex-col justify-center mt-20 bg-light-gray h-[45rem] text-disabled-gray text-5xl font-medium text-center h-[45rem]">
+      <div className="flex flex-col justify-center items-center mt-20 bg-light-gray h-[45rem] text-disabled-gray text-5xl font-medium text-center h-[45rem]">
         {selectText}
         {selectText === "제품 상세" && (
-          <p className="py-10">{detail?.product_info}</p>
+          <p className="p-10 text-xl text-left">{detail?.product_info}</p>
         )}
       </div>
     </div>

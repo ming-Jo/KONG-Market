@@ -7,9 +7,7 @@ const ProductListItem = ({ product }: { product: Product }) => {
     <li className="w-full p-5 bg-white shadow-small rounded-3xl hover:bg-light-choco">
       <Link to={`product/${product.product_id}`}>
         <figure>
-          <div
-            className={`relative mb-5 border border-light-gray rounded-2xl overflow-hidden h-0 pt-[100%]`}
-          >
+          <div className="relative mb-5 border border-light-gray rounded-2xl overflow-hidden h-0 pt-[100%]">
             <img
               src={`${product ? product.image : ""}`}
               alt=""
