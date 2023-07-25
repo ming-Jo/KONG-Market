@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MinusCountButton,
   PlusCountButton,
@@ -20,16 +20,19 @@ const QuantityButtonBox = ({
     stock > 0 && refCount <= stock
   );
 
+  // 재고(stock) 또는 초기 수량(refCount) 값이 변경될 때 countUpState 업데이트
+  useEffect(() => {
+    setCountUpState(stock > 0 && quantity < stock);
+  }, [stock, quantity]);
+
   const onCountUp = () => {
     if (!countUpState) return;
     const plusCount = quantity + 1;
-    if (plusCount >= stock) setCountUpState(false);
     handelCountValue(plusCount);
   };
 
   const onCountDown = () => {
     const minusCount = quantity <= 1 ? 1 : quantity - 1;
-    if (!countUpState && minusCount <= stock) setCountUpState(true);
     handelCountValue(minusCount);
   };
 
