@@ -14,7 +14,7 @@ const SearchInput = () => {
         />
         <button
           type="button"
-          className="w-[2.8rem] h-[2.8rem] absolute right-[2.2rem] bg-[url('src/assets/icon-search.svg')] bg-no-repeat bg-center bg-cover"
+          className="w-[2.8rem] h-[2.8rem] absolute right-[2.2rem] bg-[url('@/assets/icon-search.svg')] bg-no-repeat bg-center bg-cover"
         ></button>
       </fieldset>
     </form>
