@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@hooks/hooks";
-import { fetchProductData, getProductState } from "@store/slice/productSlice";
-import Carousel from "@components/carousel/Carousel";
-import HomeSection from "@pages/Home/HomeSection";
-import PaginationGroup from "@pages/Home/pagination/PaginationGroup";
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
+import { fetchProductData, getProductState } from '@store/slice/productSlice';
+import Carousel from '@components/carousel/Carousel';
+import HomeSection from '@pages/Home/HomeSection';
+import PaginationGroup from '@pages/Home/pagination/PaginationGroup';
 
 const Home = () => {
   const dispatch = useAppDispatch();

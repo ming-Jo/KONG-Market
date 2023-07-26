@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface HeaderIconBtnProps {
   children?: React.ReactNode;
@@ -9,10 +9,7 @@ interface HeaderIconBtnProps {
   onClick?: () => void;
 }
 
-const HeaderIconButton = ({
-  svg: SvgComponent,
-  ...props
-}: HeaderIconBtnProps) => {
+const HeaderIconButton = ({ svg: SvgComponent, ...props }: HeaderIconBtnProps) => {
   return (
     <button
       type="button"

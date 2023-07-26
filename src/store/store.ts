@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { loginSlice } from "@store/slice/loginSlice";
-import { modalSlice } from "@store/slice/modalSlice";
-import { productSlice } from "@store/slice/productSlice";
-import { detailSlice } from "./slice/detailSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { loginSlice } from '@store/slice/loginSlice';
+import { modalSlice } from '@store/slice/modalSlice';
+import { productSlice } from '@store/slice/productSlice';
+import { detailSlice } from '@store/slice/detailSlice';
 
 const store = configureStore({
   reducer: {

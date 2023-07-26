@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 interface CommonBtnProps {
   children: React.ReactNode;
-  type?: "button" | "submit";
+  type?: 'button' | 'submit';
   icon?: string;
   className?: string;
   disabled?: boolean;
@@ -18,7 +18,7 @@ export const CommonButton = ({ children, ...props }: CommonBtnProps) => {
     <button
       {...props}
       className={`px-[3.2rem] py-[1.6rem] rounded-[0.5rem] text-white bg-main-choco disabled:bg-disabled-gray ${
-        props.className || ""
+        props.className || ''
       }`}
     >
       {props.icon && <img src={props.icon} />}
@@ -27,19 +27,14 @@ export const CommonButton = ({ children, ...props }: CommonBtnProps) => {
   );
 };
 
-export const DetailMenuButton = ({
-  children,
-  ...props
-}: DetailMenuButtonProps) => {
+export const DetailMenuButton = ({ children, ...props }: DetailMenuButtonProps) => {
   return (
     <button
       type="button"
       onClick={props.clickHandler}
       className={`w-full py-8 border-b-[0.6rem] text-[1.8rem] ${
-        props.clicked === true
-          ? "border-main-choco text-main-choco"
-          : "border-disabled-gray text-dark-gray"
-      } ${props.className || ""}`}
+        props.clicked === true ? 'border-main-choco text-main-choco' : 'border-disabled-gray text-dark-gray'
+      } ${props.className || ''}`}
     >
       {children}
     </button>

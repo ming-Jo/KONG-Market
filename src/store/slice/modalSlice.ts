@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '@store/store';
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,15 +12,15 @@ interface ModalProps {
 
 const initialState: ModalProps = {
   isOpen: false,
-  content: "",
+  content: '',
   buttonValue: {
-    yes: "예",
-    no: "아니오",
+    yes: '예',
+    no: '아니오',
   },
 };
 
 export const modalSlice = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState,
   reducers: {
     openModal: (state) => {

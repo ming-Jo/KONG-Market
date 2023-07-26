@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface CommonInputProps {
   type: string;
@@ -37,7 +37,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       placeholder={props.placeholder}
       required={props.required}
       className={`w-full p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
-        props.className || ""
+        props.className || ''
       }`}
     />
   );
@@ -46,10 +46,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
 export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
   return (
     <>
-      <label
-        htmlFor={props.id}
-        className={`mt-5 mb-4 text-dark-gray ${props.labelClassName || ""}`}
-      >
+      <label htmlFor={props.id} className={`mt-5 mb-4 text-dark-gray ${props.labelClassName || ''}`}>
         {props.children}
       </label>
       <input
@@ -59,7 +56,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         autoComplete={props.autocomplete}
         required={props.required}
         className={`p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
-          props.inputClassName || ""
+          props.inputClassName || ''
         }`}
       />
     </>
@@ -69,11 +66,9 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
 export const InvalidSpan = ({ children, ...props }: InvalidSpanProps) => {
   return (
     <span
-      className={`${
-        props.invalid === true
-          ? "hidden"
-          : "block mt-2 text-[1.2rem] text-red-400"
-      } ${props.className || ""}`}
+      className={`${props.invalid === true ? 'hidden' : 'block mt-2 text-[1.2rem] text-red-400'} ${
+        props.className || ''
+      }`}
     >
       {children}
     </span>

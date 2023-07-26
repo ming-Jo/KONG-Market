@@ -1,6 +1,6 @@
-import React from "react";
-import { Product } from "@store/slice/productSlice";
-import ProductListItem from "@components/contents/ProductListItem";
+import React from 'react';
+import { Product } from '@store/slice/productSlice';
+import ProductListItem from '@components/contents/ProductListItem';
 
 const HomeSection = ({ productList }: { productList: Product[] }) => {
   return (

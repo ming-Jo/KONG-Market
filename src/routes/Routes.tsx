@@ -1,68 +1,68 @@
-import React from "react";
-import { createBrowserRouter } from "react-router-dom";
-import { App, SellerApp } from "@/App";
-import Home from "@pages/Home/Home";
-import Cart from "@pages/Cart/Cart";
-import Detail from "@pages/Detail/Detail";
-import Payment from "@pages/Payment/Payment";
-import Mypage from "@pages/Mypage/Mypage";
-import SellerCenter from "@pages/Seller/SellerCenter";
-import Upload from "@pages/Seller/Upload";
-import Login from "@pages/Login/Login";
-import SignUp from "@pages/SignUp/SignUp";
-import NotFound from "@pages/NotFound/NotFound";
+import React from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import { App, SellerApp } from '@/App';
+import Home from '@pages/Home/Home';
+import Cart from '@pages/Cart/Cart';
+import Detail from '@pages/Detail/Detail';
+import Payment from '@pages/Payment/Payment';
+import Mypage from '@pages/Mypage/Mypage';
+import SellerCenter from '@pages/Seller/SellerCenter';
+import Upload from '@pages/Seller/Upload';
+import Login from '@pages/Login/Login';
+import SignUp from '@pages/SignUp/SignUp';
+import NotFound from '@pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "",
+        path: '',
         element: <Home />,
       },
       {
-        path: "cart",
+        path: 'cart',
         element: <Cart />,
       },
       {
-        path: "product/:productId",
+        path: 'product/:productId',
         element: <Detail />,
       },
       {
-        path: "payment",
+        path: 'payment',
         element: <Payment />,
       },
       {
-        path: "mypage",
+        path: 'mypage',
         element: <Mypage />,
       },
     ],
   },
   {
-    path: "/seller-center",
+    path: '/seller-center',
     element: <SellerApp />,
     children: [
       {
-        path: "",
+        path: '',
         element: <SellerCenter />,
       },
       {
-        path: "upload",
+        path: 'upload',
         element: <Upload />,
       },
     ],
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: '/signup',
     element: <SignUp />,
   },
   {
-    path: "/*",
+    path: '/*',
     element: <NotFound />,
   },
 ]);

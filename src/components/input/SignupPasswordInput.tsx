@@ -1,5 +1,5 @@
-import React from "react";
-import { CommonLabelInput, InvalidSpan } from "@components/input/CommonInput";
+import React from 'react';
+import { CommonLabelInput, InvalidSpan } from '@components/input/CommonInput';
 
 const SignupPasswordInput = () => {
   return (

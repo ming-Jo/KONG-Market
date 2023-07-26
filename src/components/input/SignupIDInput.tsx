@@ -1,6 +1,6 @@
-import React from "react";
-import { CommonInput, InvalidSpan } from "@components/input/CommonInput";
-import { CommonButton } from "@components/button/CommonButton";
+import React from 'react';
+import { CommonInput, InvalidSpan } from '@components/input/CommonInput';
+import { CommonButton } from '@components/button/CommonButton';
 
 const SignupIDInput = () => {
   return (
@@ -14,10 +14,7 @@ const SignupIDInput = () => {
           중복확인
         </CommonButton>
       </div>
-      <InvalidSpan
-        children="아이디는 3-20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다."
-        className="shrink-0"
-      />
+      <InvalidSpan children="아이디는 3-20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다." className="shrink-0" />
     </>
   );
 };

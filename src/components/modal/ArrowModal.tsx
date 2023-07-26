@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ArrowModalProps {
   on: boolean;
@@ -10,7 +10,7 @@ const ArrowModal = ({ on, list, refCurrent }: ArrowModalProps) => {
   return (
     <div
       className={`absolute text-center bg-white border rounded-2xl w-[13rem] top-[5.8rem] right-[0.2rem] border-light-gray text-dark-gray shadow-small before:absolute before:w-0 before:h-0 before:border-l-[1.2rem] before:border-r-[1.2rem] before:border-b-[1.2rem] before:border-t-0 before:border-transparent before:border-b-light-gray before:-top-[1.2rem] before:right-[4.5rem] ${
-        on ? "block" : "hidden"
+        on ? 'block' : 'hidden'
       }`}
       ref={refCurrent}
     >

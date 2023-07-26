@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@hooks/hooks";
-import {
-  fetchLogin,
-  getLoginStatus,
-  getLoginUserType,
-} from "@store/slice/loginSlice";
-import ToggleButton from "@components/button/ToggleButton";
-import { CommonButton } from "@components/button/CommonButton";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@hooks/hooks';
+import { fetchLogin, getLoginStatus, getLoginUserType } from '@store/slice/loginSlice';
+import ToggleButton from '@components/button/ToggleButton';
+import { CommonButton } from '@components/button/CommonButton';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const initialValues = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
 
   const [formValue, setFormValue] = useState(initialValues);
@@ -24,12 +20,12 @@ const LoginForm = () => {
   const loginStatus = useAppSelector(getLoginStatus);
 
   useEffect(() => {
-    if (loginStatus === "failed") {
-      console.log("로그인 실패");
+    if (loginStatus === 'failed') {
+      console.log('로그인 실패');
     }
-    if (loginStatus === "success") {
+    if (loginStatus === 'success') {
       setFormValue(initialValues);
-      navigate("/");
+      navigate('/');
     }
   }, [loginStatus]);
 
@@ -53,10 +49,7 @@ const LoginForm = () => {
     <section className="flex flex-col mx-auto w-[55rem] relative">
       <h2 className="sr-only">로그인 화면</h2>
       <ToggleButton />
-      <form
-        onSubmit={handelOnSubmit}
-        className="rounded-b-[1rem] border-r border-l border-b border-main-choco"
-      >
+      <form onSubmit={handelOnSubmit} className="rounded-b-[1rem] border-r border-l border-b border-main-choco">
         <fieldset className="flex flex-col">
           <legend className="sr-only">login form</legend>
           <label htmlFor="username" className="sr-only">
@@ -83,10 +76,7 @@ const LoginForm = () => {
             value={formValue.password}
             required
           />
-          <CommonButton
-            type="submit"
-            className="w-[48rem] my-[3.6rem] text-[1.8rem] mx-auto"
-          >
+          <CommonButton type="submit" className="w-[48rem] my-[3.6rem] text-[1.8rem] mx-auto">
             로그인
           </CommonButton>
         </fieldset>

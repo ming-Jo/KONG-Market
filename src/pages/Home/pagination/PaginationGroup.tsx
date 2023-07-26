@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-import {
-  LeftArrowButton,
-  RightArrowButton,
-} from "@components/button/ArrowButton";
-import PaginationOl from "@pages/Home/pagination/PaginationOl";
+import React, { useState } from 'react';
+import { LeftArrowButton, RightArrowButton } from '@components/button/ArrowButton';
+import PaginationOl from '@pages/Home/pagination/PaginationOl';
 
 interface PageButtonProps {
   totalPage: number;
@@ -25,11 +22,7 @@ const PaginationGroup = ({ totalPage, getPageCount }: PageButtonProps) => {
         disabled={onPage === 1 ? true : false}
         className="transition-all opacity-40 hover:scale-110 hover:opacity-80"
       />
-      <PaginationOl
-        onPage={onPage}
-        totalPage={totalPage}
-        handlePageButton={handlePageButton}
-      />
+      <PaginationOl onPage={onPage} totalPage={totalPage} handlePageButton={handlePageButton} />
       <RightArrowButton
         onclick={() => handlePageButton(onPage + 1)}
         disabled={onPage === totalPage ? true : false}

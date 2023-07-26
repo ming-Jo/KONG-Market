@@ -1,6 +1,6 @@
-import { instance } from "@/api/axios";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "@store/store";
+import { instance } from '@/api/axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '@store/store';
 
 export interface Product {
   image: string;
@@ -24,39 +24,36 @@ interface ProductInitialState {
 }
 
 const initialState: ProductInitialState = {
-  status: "nothing",
-  error: "",
+  status: 'nothing',
+  error: '',
   totalPage: 1,
   productList: [],
 };
 
-export const fetchProductData = createAsyncThunk(
-  "products/fetchProductData",
-  async (pageNumber: number) => {
-    try {
-      const response = await instance.get(`products/?page=${pageNumber}`);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+export const fetchProductData = createAsyncThunk('products/fetchProductData', async (pageNumber: number) => {
+  try {
+    const response = await instance.get(`products/?page=${pageNumber}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export const productSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProductData.pending, (state) => {
-      state.status = "loading";
+      state.status = 'loading';
     });
     builder.addCase(fetchProductData.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = 'success';
       state.totalPage = Math.floor(action.payload.count / 15) + 1;
       state.productList = action.payload.results;
     });
     builder.addCase(fetchProductData.rejected, (state) => {
-      state.status = "failed";
+      state.status = 'failed';
       state.productList = [];
     });
   },

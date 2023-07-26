@@ -1,9 +1,9 @@
-import React from "react";
-import { useAppSelector } from "@hooks/hooks";
-import { getDetailState } from "@store/slice/detailSlice";
-import ProductDetail from "@components/details/ProductDetail";
-import ProductCount from "@components/details/ProductCount";
-import { CommonButton } from "@components/button/CommonButton";
+import React from 'react';
+import { useAppSelector } from '@hooks/hooks';
+import { getDetailState } from '@store/slice/detailSlice';
+import ProductDetail from '@components/details/ProductDetail';
+import ProductCount from '@components/details/ProductCount';
+import { CommonButton } from '@components/button/CommonButton';
 
 interface DetailUiGroupProps {
   disabled: boolean;
@@ -20,11 +20,7 @@ const DetailUiGroup = ({ ...props }: DetailUiGroupProps) => {
         <>
           {/* 상품 이미지 */}
           <div className="w-full relative rounded-3xl overflow-hidden before:block before:pb-[100%] before:bg-light-gray">
-            <img
-              src={detail?.image}
-              alt="상품 대표이미지"
-              className="absolute top-0 object-cover w-full h-full"
-            />
+            <img src={detail?.image} alt="상품 대표이미지" className="absolute top-0 object-cover w-full h-full" />
           </div>
 
           {/* 상품 정보 */}

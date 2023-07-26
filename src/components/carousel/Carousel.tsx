@@ -1,11 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { carouselData } from "@components/carousel/carouselData";
-import {
-  LeftArrowButton,
-  RightArrowButton,
-} from "@components/button/ArrowButton";
-import DotButton from "@components/carousel/DotButton";
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { carouselData } from '@components/carousel/carouselData';
+import { LeftArrowButton, RightArrowButton } from '@components/button/ArrowButton';
+import DotButton from '@components/carousel/DotButton';
 
 const Carousel = () => {
   const [carouselIndex, setCarouselIndex] = useState(1);
@@ -65,7 +62,7 @@ const Carousel = () => {
               src={`/public/images/carouselSample/banner${index + 1}.png`}
               alt=""
               className={`object-cover w-full h-full ${
-                carouselIndex === index + 1 ? "opacity-100" : "opacity-0"
+                carouselIndex === index + 1 ? 'opacity-100' : 'opacity-0'
               } transition-[opacity] ease-in-out duration-[500ms]`}
             />
           </Link>

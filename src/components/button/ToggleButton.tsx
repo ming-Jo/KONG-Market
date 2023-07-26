@@ -1,5 +1,5 @@
-import React from "react";
-import LoginTapButton from "./LoginTapButton";
+import React from 'react';
+import LoginTapButton from './LoginTapButton';
 
 const ToggleButton = () => {
   return (
