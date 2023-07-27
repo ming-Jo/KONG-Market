@@ -57,7 +57,7 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    setUserType: (state, action) => {
+    setLoginUserType: (state, action) => {
       console.log(action);
       state.userType = action.payload;
     },
@@ -95,5 +95,7 @@ export const getLoginStatus = (state: RootState) => state.login.status;
 export const getLoginUserType = (state: RootState) => state.login.userType;
 export const getAuthState = (state: RootState) => state.login;
 export const getLoginError = (state: RootState) => state.login.error;
+
+export const { setLoginUserType } = loginSlice.actions;
 
 console.log(loginSlice.actions);
