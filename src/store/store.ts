@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { loginSlice } from '@store/slice/loginSlice';
+import { signupSlice } from '@store/slice/signupSlice';
 import { modalSlice } from '@store/slice/modalSlice';
 import { productSlice } from '@store/slice/productSlice';
 import { detailSlice } from '@store/slice/detailSlice';
@@ -7,6 +8,7 @@ import { detailSlice } from '@store/slice/detailSlice';
 const store = configureStore({
   reducer: {
     login: loginSlice.reducer,
+    signup: signupSlice.reducer,
     modal: modalSlice.reducer,
     product: productSlice.reducer,
     detail: detailSlice.reducer,
