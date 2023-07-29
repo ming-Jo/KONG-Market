@@ -12,8 +12,8 @@ interface CommonInputProps {
 
 interface CommonLabelInputProps {
   type: string;
-  children?: React.ReactNode;
-  id?: string;
+  label?: string;
+  name?: string;
   placeholder?: string;
   autocomplete?: string;
   required?: boolean;
@@ -46,12 +46,12 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
 export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
   return (
     <>
-      <label htmlFor={props.id} className={`mt-5 mb-4 text-dark-gray ${props.labelClassName || ''}`}>
-        {props.children}
+      <label htmlFor={props.name} className={`mt-5 mb-4 text-dark-gray ${props.labelClassName || ''}`}>
+        {props.label}
       </label>
       <input
         type={props.type}
-        id={props.id}
+        id={props.name}
         placeholder={props.placeholder}
         autoComplete={props.autocomplete}
         required={props.required}
