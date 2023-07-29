@@ -1,38 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CommonInput } from '@components/input/CommonInput';
 import iconUpArrow from '@assets/icon-up-arrow.svg';
 import iconDownArrow from '@assets/icon-down-arrow.svg';
-
-interface DomainListItemProps {
-  children: React.ReactNode;
-  emailValue?: String;
-  onClick?: React.MouseEventHandler;
-}
-
-const DomainListItem = ({ ...props }: DomainListItemProps) => {
-  return (
-    <li>
-      <button type="button" className="w-full px-12 py-4 text-left hover:bg-light-choco" onClick={props.onClick}>
-        {props.children}
-      </button>
-    </li>
-  );
-};
-
-const DomainListUl = ({ ...props }) => {
-  return (
-    <ul className="gray-scroll absolute top-[6rem] w-full max-h-[15rem] overflow-y-scroll bg-white border border-dark-gray rounded-[0.5rem] shadow-[0_0_3px_0_rgba(0,0,0,0.2)]">
-      <DomainListItem children="google.com" onClick={props.handleEmailValue} />
-      <DomainListItem children="naver.com" onClick={props.handleEmailValue} />
-      <DomainListItem children="daum.net" onClick={props.handleEmailValue} />
-      <DomainListItem children="nate.com" onClick={props.handleEmailValue} />
-    </ul>
-  );
-};
+import SelectBox from '@components/selectBox/SelectBox';
 
 const EmailInput = () => {
+  const domainItemList = ['google.com', 'naver.com', 'daum.net', 'nate.com'];
+
   const [toggle, setToggle] = useState(false);
   const [emailValue, setEmailValue] = useState('');
+  const selectBoxRef = useRef<HTMLUListElement>(null);
 
   const handleEmailValue = (event: React.MouseEvent) => {
     const value = event.currentTarget.textContent;
@@ -45,6 +22,20 @@ const EmailInput = () => {
   const handleBtnToggle = () => {
     !toggle ? setToggle(true) : setToggle(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (selectBoxRef.current && !selectBoxRef.current.contains(event.target as Node)) {
+        setToggle(false);
+      }
+    };
+    if (toggle) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [toggle]);
 
   return (
     <div className="mt-5 text-dark-gray">
@@ -60,7 +51,9 @@ const EmailInput = () => {
               <img src={iconUpArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />
             )}
           </button>
-          {toggle ? <DomainListUl handleEmailValue={handleEmailValue} /> : null}
+          {toggle ? (
+            <SelectBox refCurrent={selectBoxRef} selectItemList={domainItemList} onclick={handleEmailValue} />
+          ) : null}
         </div>
       </div>
     </div>
