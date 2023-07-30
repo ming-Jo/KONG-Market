@@ -36,7 +36,7 @@ const initialState: RegisterState = {
 
 // 계정 유효성 검증
 export const fetchValidUserName = createAsyncThunk(
-  'register/fetchValidUserName',
+  'signup/fetchValidUserName',
   async (username: string, { rejectWithValue }) => {
     try {
       const data = { username };
@@ -51,7 +51,7 @@ export const fetchValidUserName = createAsyncThunk(
 
 // 사업자등록번호 유효성 검증
 export const fetchValidCompanyNumber = createAsyncThunk(
-  'register/fetchValidCompanyNumber',
+  'signup/fetchValidCompanyNumber',
   async (number: string, { rejectWithValue }) => {
     try {
       const data = { company_registration_number: number };
@@ -66,7 +66,7 @@ export const fetchValidCompanyNumber = createAsyncThunk(
 
 // 회원가입
 export const fetchSignUp = createAsyncThunk(
-  'register/fetchSignUp',
+  'signup/fetchSignUp',
   async ({ userType, userData }: { userType: string; userData: RegisterData }, { rejectWithValue }) => {
     const url = userType === 'BUYER' ? 'accounts/signup/' : 'accounts/signup_seller/';
     try {
@@ -85,7 +85,21 @@ export const signupSlice = createSlice({
   name: 'signup',
   initialState,
   reducers: {
+    resetAll: () => initialState,
+    resetName: (state) => {
+      state.nameStatus = 'idle';
+      state.nameMessage = '';
+    },
+    resetCompany: (state) => {
+      state.companyNumberStatus = 'idle';
+      state.companyNumberMessage = '';
+    },
+    resetRegister: (state) => {
+      state.registerStatus = 'idle';
+      state.error = '';
+    },
     setSignupUserType: (state, action) => {
+      console.log(action);
       state.userType = action.payload;
     },
   },
@@ -93,6 +107,8 @@ export const signupSlice = createSlice({
     // 계정 검증
     builder.addCase(fetchValidUserName.pending, (state) => {
       state.nameStatus = 'loading';
+      state.nameMessage = '';
+      state.error = '';
     });
     builder.addCase(fetchValidUserName.fulfilled, (state, action) => {
       state.nameStatus = 'success';
@@ -145,4 +161,4 @@ export const signupSlice = createSlice({
 export const getSignupState = (state: RootState) => state.signup;
 export const getSignupUserType = (state: RootState) => state.signup.userType;
 
-export const { setSignupUserType } = signupSlice.actions;
+export const { setSignupUserType, resetAll, resetName, resetCompany, resetRegister } = signupSlice.actions;
