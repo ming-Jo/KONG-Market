@@ -1,29 +1,45 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CommonInput, CommonLabelInput, InvalidSpan } from '@components/input/CommonInput';
 import { CommonButton } from '@components/button/CommonButton';
 
 interface InputWithButtonProps {
   label: string;
   name: string;
+  inputValue: string;
   buttonValue: string;
+  onClick?: (value: string) => void;
+  onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
+  onbutton?: boolean;
 }
 
 export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
+  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  // 입력 버튼 클릭 이벤트 함수
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    props.onClick?.(inputRef.current.value);
+  };
+
   return (
     <>
       <div className="flex flex-wrap">
         <CommonLabelInput
           type="text"
           label={props.label}
+          refCurrent={inputRef}
           name={props.name}
+          value={props.inputValue}
+          onchange={props.onchange}
           labelClassName="w-full"
           inputClassName="flex-grow"
         />
-        <CommonButton type="button" disabled className="w-4/12 ml-5">
+        <CommonButton type="button" onClick={handleButtonClick} disabled={!props.onbutton} className="w-4/12 ml-5">
           {props.buttonValue}
         </CommonButton>
       </div>
-      <InvalidSpan children="아이디는 3-20자 이내의 영어 소문자, 대문자, 숫자만 가능합니다." className="shrink-0" />
+      {props.inputValue && props.error ? <InvalidSpan className="shrink-0">{props.error}</InvalidSpan> : null}
     </>
   );
 };
@@ -33,7 +49,7 @@ export const PasswordInput = () => {
     <>
       <CommonLabelInput
         label="비밀번호"
-        name="userPw"
+        name="password"
         type="password"
         required
         inputClassName="invalid:bg-[url('/src/assets/icon-check-off.svg')] valid:bg-[url('/src/assets/icon-check-on.svg')] bg-no-repeat bg-[42.5rem]"
