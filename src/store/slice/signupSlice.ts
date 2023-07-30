@@ -44,7 +44,7 @@ export const fetchValidUserName = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       console.log(error);
-      return rejectWithValue(error.response.data.Fail_message);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );
@@ -59,7 +59,7 @@ export const fetchValidCompanyNumber = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       console.log(error);
-      return rejectWithValue(error.response.data.Fail_message);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );
@@ -76,7 +76,7 @@ export const fetchSignUp = createAsyncThunk(
     } catch (error: any) {
       console.log(error);
       console.log(error.response.data);
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );

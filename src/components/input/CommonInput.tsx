@@ -21,6 +21,7 @@ interface CommonLabelInputProps {
   required?: boolean;
   labelClassName?: string;
   inputClassName?: string;
+  disabled?: boolean;
   onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -62,9 +63,9 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         autoComplete={props.autocomplete}
         onChange={props.onchange}
         required
-        className={`p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
-          props.inputClassName || ''
-        }`}
+        className={`p-[1.6rem] border border-dark-gray rounded-[0.5rem] ${
+          props.disabled ? 'outline-red-400' : 'outline-green-300'
+        } ${props.inputClassName || ''}`}
       />
     </>
   );

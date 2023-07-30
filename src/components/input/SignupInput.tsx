@@ -32,6 +32,7 @@ export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
           name={props.name}
           value={props.inputValue}
           onchange={props.onchange}
+          disabled={!props.onbutton}
           labelClassName="w-full"
           inputClassName="flex-grow"
         />
