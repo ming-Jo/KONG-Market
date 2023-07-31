@@ -43,7 +43,7 @@ const EmailInput = () => {
       <div className="flex gap-[1.2rem] text-[1.6rem] mt-4 items-center">
         <CommonInput type="text" id="userEmail" name="emailId" className="flex-grow min-w-0 basis-0" />@
         <div className="relative">
-          <CommonInput type="text" name="emailDomain" placeholder="example.com" defaultValue={emailValue} />
+          <CommonInput type="text" name="emailDomain" placeholder="example.com" value={emailValue} />
           <button type="button" onClick={handleBtnToggle} className="absolute top-0 right-0 p-[1.6rem]">
             {toggle ? (
               <img src={iconDownArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />

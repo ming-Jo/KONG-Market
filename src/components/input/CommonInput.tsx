@@ -3,7 +3,7 @@ import React from 'react';
 interface CommonInputProps {
   type: string;
   id?: string;
-  defaultValue?: string;
+  value?: string;
   name?: string;
   placeholder?: string;
   className?: string;
@@ -22,13 +22,14 @@ interface CommonLabelInputProps {
   labelClassName?: string;
   inputClassName?: string;
   disabled?: boolean;
-  onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface InvalidSpanProps {
   // children: React.ReactNode;
   children: string;
   className?: string;
+  valid?: boolean;
 }
 
 export const CommonInput = ({ ...props }: CommonInputProps) => {
@@ -36,7 +37,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
     <input
       type={props.type}
       id={props.name}
-      defaultValue={props.defaultValue}
+      defaultValue={props.value}
       name={props.name}
       placeholder={props.placeholder}
       required={props.required}
@@ -61,7 +62,7 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
         defaultValue={props.value}
         placeholder={props.placeholder}
         autoComplete={props.autocomplete}
-        onChange={props.onchange}
+        onChange={props.onChange}
         required
         className={`p-[1.6rem] border border-dark-gray rounded-[0.5rem] ${
           props.disabled ? 'outline-red-400' : 'outline-green-300'
@@ -72,5 +73,11 @@ export const CommonLabelInput = ({ ...props }: CommonLabelInputProps) => {
 };
 
 export const InvalidSpan = ({ children, ...props }: InvalidSpanProps) => {
-  return <span className={`block mt-2 text-[1.2rem] text-red-400 ${props.className || ''}`}>{children}</span>;
+  return (
+    <span
+      className={`block mt-2 text-[1.2rem] ${props.valid ? 'text-green-500' : 'text-red-400'} ${props.className || ''}`}
+    >
+      {children}
+    </span>
+  );
 };

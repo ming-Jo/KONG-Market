@@ -87,15 +87,15 @@ export const signupSlice = createSlice({
   reducers: {
     resetAll: () => initialState,
     resetName: (state) => {
-      state.nameStatus = 'idle';
+      state.nameStatus = 'nothing';
       state.nameMessage = '';
     },
     resetCompany: (state) => {
-      state.companyNumberStatus = 'idle';
+      state.companyNumberStatus = 'nothing';
       state.companyNumberMessage = '';
     },
     resetRegister: (state) => {
-      state.registerStatus = 'idle';
+      state.registerStatus = 'nothing';
       state.error = '';
     },
     setSignupUserType: (state, action) => {
