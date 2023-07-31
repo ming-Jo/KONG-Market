@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { CommonInput, CommonLabelInput, InvalidSpan } from '@components/input/CommonInput';
 import { CommonButton } from '@components/button/CommonButton';
 
@@ -8,9 +8,10 @@ interface InputWithButtonProps {
   inputValue: string;
   buttonValue: string;
   onClick?: (value: string) => void;
-  onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  error: string;
   onbutton?: boolean;
+  valid?: boolean;
 }
 
 export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
@@ -31,7 +32,7 @@ export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
           refCurrent={inputRef}
           name={props.name}
           value={props.inputValue}
-          onchange={props.onchange}
+          onChange={props.onChange}
           disabled={!props.onbutton}
           labelClassName="w-full"
           inputClassName="flex-grow"
@@ -40,30 +41,53 @@ export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
           {props.buttonValue}
         </CommonButton>
       </div>
-      {props.inputValue && props.error ? <InvalidSpan className="shrink-0">{props.error}</InvalidSpan> : null}
+      {props.inputValue && props.error ? (
+        <InvalidSpan valid={props.valid} className="shrink-0">
+          {props.error}
+        </InvalidSpan>
+      ) : null}
     </>
   );
 };
 
-export const PasswordInput = () => {
+interface PasswordInputProps {
+  inputValue1: string;
+  inputValue2: string;
+  error1: string;
+  error2: string;
+  valid1: boolean;
+  valid2: boolean;
+  onChange1: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange2: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const PasswordInput = ({ ...props }: PasswordInputProps) => {
   return (
     <>
       <CommonLabelInput
         label="비밀번호"
         name="password"
         type="password"
-        required
-        inputClassName="invalid:bg-[url('/src/assets/icon-check-off.svg')] valid:bg-[url('/src/assets/icon-check-on.svg')] bg-no-repeat bg-[42.5rem]"
+        onChange={props.onChange1}
+        value={props.inputValue1}
+        disabled={!props.valid1}
+        inputClassName={`bg-no-repeat bg-[42.5rem] ${
+          props.valid1 ? "bg-[url('/src/assets/icon-check-on.svg')]" : "bg-[url('/src/assets/icon-check-off.svg')]"
+        }`}
       />
-      <InvalidSpan children="비밀번호는 영문, 숫자 조합 8-20자리를 입력해주세요." />
+      {props.inputValue1 && props.error1 ? <InvalidSpan valid={props.valid1}>{props.error1}</InvalidSpan> : null}
       <CommonLabelInput
         label="비밀번호 확인"
-        name="userPwCheck"
+        name="passwordConfirm"
         type="password"
-        required
-        inputClassName="invalid:bg-[url('/src/assets/icon-check-off.svg')] valid:bg-[url('/src/assets/icon-check-on.svg')] bg-no-repeat bg-[42.5rem]"
+        onChange={props.onChange2}
+        value={props.inputValue2}
+        disabled={!props.valid2}
+        inputClassName={`bg-no-repeat bg-[42.5rem] ${
+          props.valid2 ? "bg-[url('/src/assets/icon-check-on.svg')]" : "bg-[url('/src/assets/icon-check-off.svg')]"
+        }`}
       />
-      <InvalidSpan children="비밀번호가 일치하지 않습니다." />
+      {props.inputValue2 && props.error2 ? <InvalidSpan valid={props.valid2}>{props.error2}</InvalidSpan> : null}
     </>
   );
 };
@@ -75,7 +99,7 @@ export const PhoneInput = () => {
         휴대폰 번호
       </label>
       <div className="flex gap-[1.2rem] mt-4">
-        <CommonInput type="text" defaultValue="010" name="phone1" className="flex-grow min-w-0 text-center basis-0" />
+        <CommonInput type="text" value="010" name="phone1" className="flex-grow min-w-0 text-center basis-0" />
         <CommonInput type="text" id="userPhone" name="phone2" className="flex-grow min-w-0 text-center basis-0" />
         <CommonInput type="text" name="phone3" className="flex-grow min-w-0 text-center basis-0" />
       </div>

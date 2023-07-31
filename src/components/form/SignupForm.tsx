@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import limitLength from '@utils/limitLength';
-import { idRegExp } from '@utils/regExp';
+import { idRegExp, passwordRegExp } from '@utils/regExp';
 import { fetchValidUserName, getSignupState, resetAll, resetName } from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
 import { CommonLabelInput } from '@components/input/CommonInput';
@@ -81,10 +81,26 @@ const SignupForm = () => {
   };
 
   // 비밀번호
-  const onChangePassword = () => {};
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const newValue = limitLength(value, 20);
+    const message = '비밀번호는 영문, 숫자 조합 8-20자리를 입력해주세요.';
+    const error = newValue.match(passwordRegExp) ? '' : message;
+    setFormValues({ ...formValues, [name]: newValue });
+    setErrorValues({ ...errorValues, [name]: error });
+    if (formValues.passwordConfirm && value !== formValues.passwordConfirm) {
+      setErrorValues({ ...errorValues, ['passwordConfirm']: '비밀번호가 일치하지 않습니다.' });
+    }
+  };
 
   // 비밀번호 재확인
-  const confirmPassword = () => {};
+  const confirmPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const newValue = limitLength(value, 20);
+    const message = value && (value === formValues.password ? '' : '비밀번호가 일치하지 않습니다.');
+    setFormValues({ ...formValues, [name]: newValue });
+    setErrorValues({ ...errorValues, [name]: message });
+  };
 
   // 이름
   const onChangeName = () => {};
@@ -121,14 +137,24 @@ const SignupForm = () => {
           <InputWithButton
             label="아이디"
             name="username"
-            onchange={onChangeUsername}
+            onChange={onChangeUsername}
             onClick={checkUserNameValid}
             buttonValue="중복확인"
             onbutton={onUserNameValidButton}
             inputValue={formValues.username}
             error={nameMessage || errorValues.username}
+            valid={nameStatus === 'success'}
           />
-          <PasswordInput />
+          <PasswordInput
+            onChange1={onChangePassword}
+            onChange2={confirmPassword}
+            error1={errorValues.password}
+            error2={errorValues.passwordConfirm}
+            inputValue1={formValues.password}
+            inputValue2={formValues.passwordConfirm}
+            valid1={formValues.password.length > 0 && !errorValues.password}
+            valid2={formValues.passwordConfirm.length > 0 && !errorValues.passwordConfirm}
+          />
           <CommonLabelInput label="이름" name="name" type="text" labelClassName="pt-10" />
           <PhoneInput />
           <EmailInput />
@@ -137,11 +163,12 @@ const SignupForm = () => {
               <InputWithButton
                 label="사업자등록번호"
                 name="companyNumber"
-                onchange={onChangeCompanyNumber}
+                onChange={onChangeCompanyNumber}
                 onClick={checkCompanyNumberValid}
                 buttonValue="인증"
                 onbutton={onCompanyNumberValidButton}
                 inputValue={sellerValues.companyNumber}
+                error={''}
               />
               <CommonLabelInput label="스토어 이름" name="storeName" type="text" />
             </>
