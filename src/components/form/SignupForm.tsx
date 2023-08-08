@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import limitLength from '@utils/limitLength';
-import { idRegExp, nameRegExp, passwordRegExp } from '@utils/regExp';
+import { idRegExp, nameRegExp, passwordRegExp, phoneRegExp } from '@utils/regExp';
 import { fetchValidUserName, getSignupState, resetAll, resetName } from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
 import { CommonLabelInput } from '@components/input/CommonInput';
@@ -115,14 +115,21 @@ const SignupForm = () => {
     const { name, value } = event.target;
     const newValue = limitLength(value, 10);
     setFormValues({ ...formValues, [name]: newValue });
-    const message = '이름은 한글 혹은 영어로 10자리까지 가능합니다.';
+    const message = '이름은 한글 혹은 영어로 2 - 10자리까지 가능합니다.';
     const error = newValue.match(nameRegExp) ? '사용 가능한 이름입니다.' : message;
     setErrorValues({ ...errorValues, [name]: error });
     newValue.match(nameRegExp) ? setValid(true) : setValid(false);
   };
 
   // 휴대폰 번호
-  const onChangePhoneNumber = () => {};
+  const onChangePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const newValue = limitLength(value, 4);
+    const message = '숫자만 입력할 수 있습니다.';
+    const error = newValue.match(phoneRegExp) ? '' : message;
+    setFormValues({ ...formValues, [name]: newValue });
+    setErrorValues({ ...errorValues, ['phone']: error });
+  };
 
   // 이메일
   const onChangeEmail = () => {};
@@ -182,9 +189,13 @@ const SignupForm = () => {
             labelClassName="pt-10"
             inputClassName="w-full"
             valid={valid}
-            disabled={valid}
           />
-          <PhoneInput />
+          <PhoneInput
+            onChange={onChangePhoneNumber}
+            value2={formValues.phone2}
+            value3={formValues.phone3}
+            error={errorValues.phone}
+          />
           <EmailInput />
 
           {userType === 'SELLER' && (

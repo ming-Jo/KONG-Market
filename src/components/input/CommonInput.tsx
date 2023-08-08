@@ -7,7 +7,7 @@ interface CommonInputProps {
   name?: string;
   placeholder?: string;
   className?: string;
-  required?: boolean;
+  autoComplete?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -19,7 +19,6 @@ interface CommonLabelInputProps {
   refCurrent?: React.RefObject<HTMLInputElement>;
   placeholder?: string;
   autocomplete?: string;
-  required?: boolean;
   labelClassName?: string;
   inputClassName?: string;
   error?: string;
@@ -29,7 +28,6 @@ interface CommonLabelInputProps {
 }
 
 interface InvalidSpanProps {
-  // children: React.ReactNode;
   children: string;
   className?: string;
   valid?: boolean;
@@ -44,7 +42,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       onChange={props.onChange}
       name={props.name}
       placeholder={props.placeholder}
-      required={props.required}
+      required
       className={`w-full p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ''
       }`}

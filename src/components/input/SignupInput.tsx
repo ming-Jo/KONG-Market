@@ -111,10 +111,17 @@ export const PasswordInput = ({ ...props }: PasswordInputProps) => {
   );
 };
 
-export const PhoneInput = () => {
+interface PhoneInputProps {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value2: string;
+  value3: string;
+  error: string;
+}
+
+export const PhoneInput = ({ ...props }: PhoneInputProps) => {
   return (
     <div className="mt-5">
-      <label htmlFor="userPhone" className="text-dark-gray">
+      <label htmlFor="phone" className="text-dark-gray">
         휴대폰 번호
       </label>
       <div className="flex gap-[1.2rem] mt-4">
@@ -122,16 +129,28 @@ export const PhoneInput = () => {
           type="text"
           value="010"
           name="phone1"
+          onChange={props.onChange}
           className="flex-grow min-w-0 text-center basis-0"
         />
         <CommonInput
           type="text"
-          id="userPhone"
+          id="phone"
           name="phone2"
+          value={props.value2}
+          onChange={props.onChange}
+          className="flex-grow min-w-0 text-center basis-0"
+          autoComplete="off"
+        />
+        <CommonInput
+          type="text"
+          name="phone3"
+          value={props.value3}
+          onChange={props.onChange}
+          autoComplete="off"
           className="flex-grow min-w-0 text-center basis-0"
         />
-        <CommonInput type="text" name="phone3" className="flex-grow min-w-0 text-center basis-0" />
       </div>
+      {props.error && <InvalidSpan className="shrink-0">{props.error}</InvalidSpan>}
     </div>
   );
 };
