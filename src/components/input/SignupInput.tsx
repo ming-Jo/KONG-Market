@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CommonInput, CommonLabelInput, InvalidSpan } from '@components/input/CommonInput';
 import { CommonButton } from '@components/button/CommonButton';
 
@@ -6,12 +6,15 @@ interface InputWithButtonProps {
   label: string;
   name: string;
   inputValue: string;
-  buttonValue: string;
-  onClick?: (value: string) => void;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error: string;
-  onbutton?: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (value: string) => void;
   valid?: boolean;
+  buttonValue?: string;
+  onbutton?: boolean;
+  disabled?: boolean;
+  labelClassName?: string;
+  inputClassName?: string;
 }
 
 export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
@@ -33,14 +36,22 @@ export const InputWithButton = ({ ...props }: InputWithButtonProps) => {
           name={props.name}
           value={props.inputValue}
           onChange={props.onChange}
-          disabled={!props.onbutton}
-          labelClassName="w-full"
-          inputClassName="flex-grow"
+          valid={props.valid}
+          labelClassName={props.labelClassName}
+          inputClassName={props.inputClassName}
         />
-        <CommonButton type="button" onClick={handleButtonClick} disabled={!props.onbutton} className="w-4/12 ml-5">
-          {props.buttonValue}
-        </CommonButton>
+        {props.onbutton?.toString() && (
+          <CommonButton
+            type="button"
+            onClick={handleButtonClick}
+            disabled={!props.onbutton}
+            className="w-4/12 ml-5"
+          >
+            {props.buttonValue}
+          </CommonButton>
+        )}
       </div>
+
       {props.inputValue && props.error ? (
         <InvalidSpan valid={props.valid} className="shrink-0">
           {props.error}
@@ -70,24 +81,32 @@ export const PasswordInput = ({ ...props }: PasswordInputProps) => {
         type="password"
         onChange={props.onChange1}
         value={props.inputValue1}
-        disabled={!props.valid1}
+        disabled={props.valid1}
         inputClassName={`bg-no-repeat bg-[42.5rem] ${
-          props.valid1 ? "bg-[url('/src/assets/icon-check-on.svg')]" : "bg-[url('/src/assets/icon-check-off.svg')]"
+          props.valid1
+            ? "bg-[url('/src/assets/icon-check-on.svg')]"
+            : "bg-[url('/src/assets/icon-check-off.svg')]"
         }`}
       />
-      {props.inputValue1 && props.error1 ? <InvalidSpan valid={props.valid1}>{props.error1}</InvalidSpan> : null}
+      {props.inputValue1 && props.error1 ? (
+        <InvalidSpan valid={props.valid1}>{props.error1}</InvalidSpan>
+      ) : null}
       <CommonLabelInput
         label="비밀번호 확인"
         name="passwordConfirm"
         type="password"
         onChange={props.onChange2}
         value={props.inputValue2}
-        disabled={!props.valid2}
+        disabled={props.valid2}
         inputClassName={`bg-no-repeat bg-[42.5rem] ${
-          props.valid2 ? "bg-[url('/src/assets/icon-check-on.svg')]" : "bg-[url('/src/assets/icon-check-off.svg')]"
+          props.valid2
+            ? "bg-[url('/src/assets/icon-check-on.svg')]"
+            : "bg-[url('/src/assets/icon-check-off.svg')]"
         }`}
       />
-      {props.inputValue2 && props.error2 ? <InvalidSpan valid={props.valid2}>{props.error2}</InvalidSpan> : null}
+      {props.inputValue2 && props.error2 ? (
+        <InvalidSpan valid={props.valid2}>{props.error2}</InvalidSpan>
+      ) : null}
     </>
   );
 };
@@ -99,8 +118,18 @@ export const PhoneInput = () => {
         휴대폰 번호
       </label>
       <div className="flex gap-[1.2rem] mt-4">
-        <CommonInput type="text" value="010" name="phone1" className="flex-grow min-w-0 text-center basis-0" />
-        <CommonInput type="text" id="userPhone" name="phone2" className="flex-grow min-w-0 text-center basis-0" />
+        <CommonInput
+          type="text"
+          value="010"
+          name="phone1"
+          className="flex-grow min-w-0 text-center basis-0"
+        />
+        <CommonInput
+          type="text"
+          id="userPhone"
+          name="phone2"
+          className="flex-grow min-w-0 text-center basis-0"
+        />
         <CommonInput type="text" name="phone3" className="flex-grow min-w-0 text-center basis-0" />
       </div>
     </div>

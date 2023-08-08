@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import limitLength from '@utils/limitLength';
-import { idRegExp, passwordRegExp } from '@utils/regExp';
+import { idRegExp, nameRegExp, passwordRegExp } from '@utils/regExp';
 import { fetchValidUserName, getSignupState, resetAll, resetName } from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
 import { CommonLabelInput } from '@components/input/CommonInput';
@@ -13,8 +13,15 @@ import ToggleButton from '@components/button/ToggleButton';
 const SignupForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { registerStatus, error, userType, nameStatus, nameMessage, companyNumberStatus, companyNumberMessage } =
-    useAppSelector(getSignupState);
+  const {
+    registerStatus,
+    error,
+    userType,
+    nameStatus,
+    nameMessage,
+    companyNumberStatus,
+    companyNumberMessage,
+  } = useAppSelector(getSignupState);
 
   const initialFormValues = {
     username: '',
@@ -49,6 +56,7 @@ const SignupForm = () => {
   const [sellerValues, setSellerValues] = useState(initialSellerValues);
   const [onUserNameValidButton, setOnUserNameValidButton] = useState(false);
   const [onCompanyNumberValidButton, setOnCompanyNumberValidButton] = useState(false);
+  const [valid, setValid] = useState(false);
 
   useEffect(() => {
     if (registerStatus === 'success') {
@@ -103,7 +111,15 @@ const SignupForm = () => {
   };
 
   // 이름
-  const onChangeName = () => {};
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const newValue = limitLength(value, 10);
+    setFormValues({ ...formValues, [name]: newValue });
+    const message = '이름은 한글 혹은 영어로 10자리까지 가능합니다.';
+    const error = newValue.match(nameRegExp) ? '사용 가능한 이름입니다.' : message;
+    setErrorValues({ ...errorValues, [name]: error });
+    newValue.match(nameRegExp) ? setValid(true) : setValid(false);
+  };
 
   // 휴대폰 번호
   const onChangePhoneNumber = () => {};
@@ -144,6 +160,8 @@ const SignupForm = () => {
             inputValue={formValues.username}
             error={nameMessage || errorValues.username}
             valid={nameStatus === 'success'}
+            labelClassName="w-full"
+            inputClassName="flex-grow"
           />
           <PasswordInput
             onChange1={onChangePassword}
@@ -155,9 +173,20 @@ const SignupForm = () => {
             valid1={formValues.password.length > 0 && !errorValues.password}
             valid2={formValues.passwordConfirm.length > 0 && !errorValues.passwordConfirm}
           />
-          <CommonLabelInput label="이름" name="name" type="text" labelClassName="pt-10" />
+          <InputWithButton
+            label="이름"
+            name="name"
+            onChange={onChangeName}
+            inputValue={formValues.name}
+            error={errorValues.name}
+            labelClassName="pt-10"
+            inputClassName="w-full"
+            valid={valid}
+            disabled={valid}
+          />
           <PhoneInput />
           <EmailInput />
+
           {userType === 'SELLER' && (
             <>
               <InputWithButton
@@ -175,10 +204,14 @@ const SignupForm = () => {
           )}
         </fieldset>
         <div className="flex m-14 text-dark-gray">
-          <input type="checkbox" id="agree" className="w-6 h-6 m-1 cursor-pointer accent-main-choco" />
+          <input
+            type="checkbox"
+            id="agree"
+            className="w-6 h-6 m-1 cursor-pointer accent-main-choco"
+          />
           <label htmlFor="agree" className="ml-2 leading-8 cursor-pointer">
-            KONG Market의 <u className="font-bold">이용약관</u> 및 <u className="font-bold">개인정보처리방침</u>에 대한
-            내용을 확인하였고 동의합니다.
+            KONG Market의 <u className="font-bold">이용약관</u> 및{' '}
+            <u className="font-bold">개인정보처리방침</u>에 대한 내용을 확인하였고 동의합니다.
           </label>
         </div>
         <CommonButton type="submit" disabled className="w-[48rem] text-[1.8rem]">
