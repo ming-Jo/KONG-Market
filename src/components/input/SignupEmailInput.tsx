@@ -1,10 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { CommonInput } from '@components/input/CommonInput';
+import { CommonInput, InvalidSpan } from '@components/input/CommonInput';
 import iconUpArrow from '@assets/icon-up-arrow.svg';
 import iconDownArrow from '@assets/icon-down-arrow.svg';
 import SelectBox from '@components/selectBox/SelectBox';
 
-const EmailInput = () => {
+interface EmailInputProps {
+  value1: string;
+  value2: string;
+  error: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const EmailInput = ({ ...props }: EmailInputProps) => {
   const domainItemList = ['google.com', 'naver.com', 'daum.net', 'nate.com'];
 
   const [toggle, setToggle] = useState(false);
@@ -39,12 +46,32 @@ const EmailInput = () => {
 
   return (
     <div className="mt-5 text-dark-gray">
-      <label htmlFor="userEmail">이메일</label>
+      <label htmlFor="email">이메일</label>
       <div className="flex gap-[1.2rem] text-[1.6rem] mt-4 items-center">
-        <CommonInput type="text" id="userEmail" name="emailId" className="flex-grow min-w-0 basis-0" />@
+        <CommonInput
+          type="text"
+          id="email"
+          name="email1"
+          value={props.value1}
+          onChange={props.onChange}
+          className="flex-grow min-w-0 basis-0"
+          autoComplete="off"
+        />
+        @
         <div className="relative">
-          <CommonInput type="text" name="emailDomain" placeholder="example.com" value={emailValue} />
-          <button type="button" onClick={handleBtnToggle} className="absolute top-0 right-0 p-[1.6rem]">
+          <CommonInput
+            type="text"
+            name="email2"
+            placeholder="example.com"
+            value={emailValue ? emailValue : props.value2}
+            onChange={props.onChange}
+            autoComplete="off"
+          />
+          <button
+            type="button"
+            onClick={handleBtnToggle}
+            className="absolute top-0 right-0 p-[1.6rem]"
+          >
             {toggle ? (
               <img src={iconDownArrow} alt="" className="w-[2.4rem] h-[2.4rem]" />
             ) : (
@@ -52,10 +79,15 @@ const EmailInput = () => {
             )}
           </button>
           {toggle ? (
-            <SelectBox refCurrent={selectBoxRef} selectItemList={domainItemList} onclick={handleEmailValue} />
+            <SelectBox
+              refCurrent={selectBoxRef}
+              selectItemList={domainItemList}
+              onclick={handleEmailValue}
+            />
           ) : null}
         </div>
       </div>
+      {props.error && <InvalidSpan className="shrink-0">{props.error}</InvalidSpan>}
     </div>
   );
 };

@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/hooks';
 import limitLength from '@utils/limitLength';
-import { idRegExp, nameRegExp, passwordRegExp, phoneRegExp } from '@utils/regExp';
+import {
+  email1RegExp,
+  email2RegExp,
+  idRegExp,
+  nameRegExp,
+  passwordRegExp,
+  phoneRegExp,
+} from '@utils/regExp';
 import { fetchValidUserName, getSignupState, resetAll, resetName } from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
 import { CommonLabelInput } from '@components/input/CommonInput';
@@ -132,9 +139,14 @@ const SignupForm = () => {
   };
 
   // 이메일
-  const onChangeEmail = () => {};
-
-  const selectEmail = () => {};
+  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    const message = '이메일 형식을 확인해주세요.';
+    const regExp = name === 'email1' ? email1RegExp : email2RegExp;
+    const error = value.match(regExp) ? '' : message;
+    setFormValues({ ...formValues, [name]: value });
+    setErrorValues({ ...errorValues, ['email']: error });
+  };
 
   // 사업자등록번호 검증
   const checkCompanyNumberValid = () => {};
@@ -196,7 +208,12 @@ const SignupForm = () => {
             value3={formValues.phone3}
             error={errorValues.phone}
           />
-          <EmailInput />
+          <EmailInput
+            onChange={onChangeEmail}
+            value1={formValues.email1}
+            value2={formValues.email2}
+            error={errorValues.email}
+          />
 
           {userType === 'SELLER' && (
             <>

@@ -12,4 +12,4 @@ export const emailRegExp =
 export const email1RegExp = '^[a-zA-Z0-9]*$';
 
 export const email2RegExp =
-  '([a-zA-Z0-9_][-a-zA-Z0-9_]*(.[-a-zA-Z0-9_]+)*.([cC][oO][mM]))(:[0-9]{1,5})?';
+  '([a-zA-Z0-9_][-a-zA-Z0-9_]*(.[-a-zA-Z0-9_]+)*.([cC][oO][mM]|[nN][eE][tT]))(:[0-9]{1,5})?';

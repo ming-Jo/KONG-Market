@@ -42,6 +42,7 @@ export const CommonInput = ({ ...props }: CommonInputProps) => {
       onChange={props.onChange}
       name={props.name}
       placeholder={props.placeholder}
+      autoComplete={props.autoComplete}
       required
       className={`w-full p-[1.6rem] border border-dark-gray rounded-[0.5rem] invalid:outline-red-400 valid:outline-green-300 ${
         props.className || ''
