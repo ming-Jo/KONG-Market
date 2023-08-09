@@ -16,6 +16,7 @@ import { CommonLabelInput } from '@components/input/CommonInput';
 import { InputWithButton, PasswordInput, PhoneInput } from '@components/input/SignupInput';
 import EmailInput from '@components/input/SignupEmailInput';
 import ToggleButton from '@components/button/ToggleButton';
+import CheckBoxInput from '@components/input/CheckBoxInput';
 
 const SignupForm = () => {
   const dispatch = useAppDispatch();
@@ -157,7 +158,9 @@ const SignupForm = () => {
   const onChangeStoreName = () => {};
 
   // 약관동의 체크
-  const onChangeCheckBox = () => {};
+  const onChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValues({ ...formValues, ['checkBox']: event.target.checked });
+  };
 
   // 회원가입 폼 제출
   const onSubmitForm = () => {};
@@ -231,17 +234,7 @@ const SignupForm = () => {
             </>
           )}
         </fieldset>
-        <div className="flex m-14 text-dark-gray">
-          <input
-            type="checkbox"
-            id="agree"
-            className="w-6 h-6 m-1 cursor-pointer accent-main-choco"
-          />
-          <label htmlFor="agree" className="ml-2 leading-8 cursor-pointer">
-            KONG Market의 <u className="font-bold">이용약관</u> 및{' '}
-            <u className="font-bold">개인정보처리방침</u>에 대한 내용을 확인하였고 동의합니다.
-          </label>
-        </div>
+        <CheckBoxInput onChange={onChangeCheckBox} />
         <CommonButton type="submit" disabled className="w-[48rem] text-[1.8rem]">
           가입하기
         </CommonButton>
