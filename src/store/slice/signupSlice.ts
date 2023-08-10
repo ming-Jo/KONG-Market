@@ -55,7 +55,10 @@ export const fetchValidCompanyNumber = createAsyncThunk(
   async (number: string, { rejectWithValue }) => {
     try {
       const data = { company_registration_number: number };
-      const response = await instance.post('accounts/signup/valid/company_registration_number/', data);
+      const response = await instance.post(
+        'accounts/signup/valid/company_registration_number/',
+        data
+      );
       return response.data;
     } catch (error: any) {
       console.log(error);
@@ -67,7 +70,10 @@ export const fetchValidCompanyNumber = createAsyncThunk(
 // 회원가입
 export const fetchSignUp = createAsyncThunk(
   'signup/fetchSignUp',
-  async ({ userType, userData }: { userType: string; userData: RegisterData }, { rejectWithValue }) => {
+  async (
+    { userType, userData }: { userType: string; userData: RegisterData },
+    { rejectWithValue }
+  ) => {
     const url = userType === 'BUYER' ? 'accounts/signup/' : 'accounts/signup_seller/';
     try {
       const data = userData;
@@ -76,7 +82,7 @@ export const fetchSignUp = createAsyncThunk(
     } catch (error: any) {
       console.log(error);
       console.log(error.response.data);
-      return rejectWithValue(error.response.data.FAIL_Message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -149,11 +155,14 @@ export const signupSlice = createSlice({
     });
     builder.addCase(fetchSignUp.rejected, (state, action) => {
       state.registerStatus = 'failed';
-      if (action.payload) {
-        console.log('회원가입 : ', action.payload);
-        console.log('회원가입 : ', action.error.message);
-      }
-      state.error = action.error.message || 'Fail to register';
+
+      const payload = action.payload as Record<string, string[]>;
+
+      const errorMessages = Object.entries(payload)
+        .filter(([_, messages]) => Array.isArray(messages) && messages.length > 0)
+        .map(([_, messages]) => messages[0]);
+
+      state.error = errorMessages.join('\n') || state.error;
     });
   },
 });
@@ -161,4 +170,5 @@ export const signupSlice = createSlice({
 export const getSignupState = (state: RootState) => state.signup;
 export const getSignupUserType = (state: RootState) => state.signup.userType;
 
-export const { setSignupUserType, resetAll, resetName, resetCompany, resetRegister } = signupSlice.actions;
+export const { setSignupUserType, resetAll, resetName, resetCompany, resetRegister } =
+  signupSlice.actions;

@@ -10,7 +10,14 @@ import {
   passwordRegExp,
   phoneRegExp,
 } from '@utils/regExp';
-import { fetchValidUserName, getSignupState, resetAll, resetName } from '@store/slice/signupSlice';
+import {
+  RegisterData,
+  fetchSignUp,
+  fetchValidUserName,
+  getSignupState,
+  resetAll,
+  resetName,
+} from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
 import { CommonLabelInput } from '@components/input/CommonInput';
 import { InputWithButton, PasswordInput, PhoneInput } from '@components/input/SignupInput';
@@ -162,8 +169,27 @@ const SignupForm = () => {
     setFormValues({ ...formValues, ['checkBox']: event.target.checked });
   };
 
+  const { username, password, passwordConfirm, name, phone1, phone2, phone3, email1, email2 } =
+    formValues;
+
   // 회원가입 폼 제출
-  const onSubmitForm = () => {};
+  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (nameStatus !== 'success') {
+      alert('아이디 인증을 완료해주세요.');
+    }
+
+    let userData: RegisterData = {
+      username,
+      password,
+      password2: passwordConfirm,
+      name,
+      phone_number: `${phone1}${phone2}${phone3}`,
+      email: `${email1}@${email2}`,
+    };
+
+    dispatch(fetchSignUp({ userType, userData }));
+  };
 
   return (
     <section className="flex flex-col mx-auto w-[55rem] mb-[10rem]">
@@ -235,7 +261,18 @@ const SignupForm = () => {
           )}
         </fieldset>
         <CheckBoxInput onChange={onChangeCheckBox} />
-        <CommonButton type="submit" disabled className="w-[48rem] text-[1.8rem]">
+        <CommonButton
+          type="submit"
+          disabled={
+            !username ||
+            !password ||
+            !passwordConfirm ||
+            !name ||
+            (!phone1 && !phone2 && !phone3) ||
+            (!email1 && !email2)
+          }
+          className="w-[48rem] text-[1.8rem]"
+        >
           가입하기
         </CommonButton>
       </form>

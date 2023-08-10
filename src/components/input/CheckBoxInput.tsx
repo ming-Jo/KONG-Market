@@ -12,6 +12,7 @@ const CheckBoxInput = ({ ...props }: CheckBoxInputProps) => {
         id="agree"
         className="w-6 h-6 m-1 cursor-pointer accent-main-choco"
         onChange={props.onChange}
+        required
       />
       <label htmlFor="agree" className="ml-2 leading-8 cursor-pointer">
         KONG Market의 <u className="font-bold">이용약관</u> 및{' '}
