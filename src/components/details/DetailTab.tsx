@@ -20,7 +20,7 @@ const DetailTab = () => {
       <ul className="grid grid-cols-4 text-[1.8rem]">
         {detailMenuList.map((item, index) => (
           <li key={index}>
-            <DetailMenuButton clicked={selectText === item ? true : false} clickHandler={handleSelectTab}>
+            <DetailMenuButton clicked={selectText === item ? true : false} onClick={handleSelectTab}>
               {item}
             </DetailMenuButton>
           </li>

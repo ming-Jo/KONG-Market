@@ -36,7 +36,7 @@ const initialState: RegisterState = {
 
 // 계정 유효성 검증
 export const fetchValidUserName = createAsyncThunk(
-  'register/fetchValidUserName',
+  'signup/fetchValidUserName',
   async (username: string, { rejectWithValue }) => {
     try {
       const data = { username };
@@ -44,30 +44,36 @@ export const fetchValidUserName = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       console.log(error);
-      return rejectWithValue(error.response.data.Fail_message);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );
 
 // 사업자등록번호 유효성 검증
 export const fetchValidCompanyNumber = createAsyncThunk(
-  'register/fetchValidCompanyNumber',
+  'signup/fetchValidCompanyNumber',
   async (number: string, { rejectWithValue }) => {
     try {
       const data = { company_registration_number: number };
-      const response = await instance.post('accounts/signup/valid/company_registration_number/', data);
+      const response = await instance.post(
+        'accounts/signup/valid/company_registration_number/',
+        data
+      );
       return response.data;
     } catch (error: any) {
       console.log(error);
-      return rejectWithValue(error.response.data.Fail_message);
+      return rejectWithValue(error.response.data.FAIL_Message);
     }
   }
 );
 
 // 회원가입
 export const fetchSignUp = createAsyncThunk(
-  'register/fetchSignUp',
-  async ({ userType, userData }: { userType: string; userData: RegisterData }, { rejectWithValue }) => {
+  'signup/fetchSignUp',
+  async (
+    { userType, userData }: { userType: string; userData: RegisterData },
+    { rejectWithValue }
+  ) => {
     const url = userType === 'BUYER' ? 'accounts/signup/' : 'accounts/signup_seller/';
     try {
       const data = userData;
@@ -85,7 +91,21 @@ export const signupSlice = createSlice({
   name: 'signup',
   initialState,
   reducers: {
+    resetAll: () => initialState,
+    resetName: (state) => {
+      state.nameStatus = 'nothing';
+      state.nameMessage = '';
+    },
+    resetCompany: (state) => {
+      state.companyNumberStatus = 'nothing';
+      state.companyNumberMessage = '';
+    },
+    resetRegister: (state) => {
+      state.registerStatus = 'nothing';
+      state.error = '';
+    },
     setSignupUserType: (state, action) => {
+      console.log(action);
       state.userType = action.payload;
     },
   },
@@ -93,6 +113,8 @@ export const signupSlice = createSlice({
     // 계정 검증
     builder.addCase(fetchValidUserName.pending, (state) => {
       state.nameStatus = 'loading';
+      state.nameMessage = '';
+      state.error = '';
     });
     builder.addCase(fetchValidUserName.fulfilled, (state, action) => {
       state.nameStatus = 'success';
@@ -133,11 +155,14 @@ export const signupSlice = createSlice({
     });
     builder.addCase(fetchSignUp.rejected, (state, action) => {
       state.registerStatus = 'failed';
-      if (action.payload) {
-        console.log('회원가입 : ', action.payload);
-        console.log('회원가입 : ', action.error.message);
-      }
-      state.error = action.error.message || 'Fail to register';
+
+      const payload = action.payload as Record<string, string[]>;
+
+      const errorMessages = Object.entries(payload)
+        .filter(([_, messages]) => Array.isArray(messages) && messages.length > 0)
+        .map(([_, messages]) => messages[0]);
+
+      state.error = errorMessages.join('\n') || state.error;
     });
   },
 });
@@ -145,4 +170,5 @@ export const signupSlice = createSlice({
 export const getSignupState = (state: RootState) => state.signup;
 export const getSignupUserType = (state: RootState) => state.signup.userType;
 
-export const { setSignupUserType } = signupSlice.actions;
+export const { setSignupUserType, resetAll, resetName, resetCompany, resetRegister } =
+  signupSlice.actions;

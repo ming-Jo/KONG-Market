@@ -6,17 +6,19 @@ interface CommonBtnProps {
   icon?: string;
   className?: string;
   disabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface DetailMenuButtonProps extends CommonBtnProps {
   clicked: boolean;
-  clickHandler?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const CommonButton = ({ children, ...props }: CommonBtnProps) => {
   return (
     <button
       {...props}
+      onClick={props.onClick}
+      disabled={props.disabled}
       className={`px-[3.2rem] py-[1.6rem] rounded-[0.5rem] text-white bg-main-choco disabled:bg-disabled-gray ${
         props.className || ''
       }`}
@@ -31,9 +33,11 @@ export const DetailMenuButton = ({ children, ...props }: DetailMenuButtonProps) 
   return (
     <button
       type="button"
-      onClick={props.clickHandler}
+      onClick={props.onClick}
       className={`w-full py-8 border-b-[0.6rem] text-[1.8rem] ${
-        props.clicked === true ? 'border-main-choco text-main-choco' : 'border-disabled-gray text-dark-gray'
+        props.clicked === true
+          ? 'border-main-choco text-main-choco'
+          : 'border-disabled-gray text-dark-gray'
       } ${props.className || ''}`}
     >
       {children}
