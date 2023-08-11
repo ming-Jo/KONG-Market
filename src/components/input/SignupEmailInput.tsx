@@ -45,8 +45,10 @@ const EmailInput = ({ ...props }: EmailInputProps) => {
   }, [toggle]);
 
   return (
-    <div className="mt-5 text-dark-gray">
-      <label htmlFor="email">이메일</label>
+    <div className="mt-5">
+      <label htmlFor="email" className="text-dark-gray">
+        이메일
+      </label>
       <div className="flex gap-[1.2rem] text-[1.6rem] mt-4 items-center">
         <CommonInput
           type="text"

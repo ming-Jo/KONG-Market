@@ -15,7 +15,11 @@ interface SelectBoxProps {
 const SelectItem = ({ ...props }: SelectItemProps) => {
   return (
     <li>
-      <button type="button" className="w-full px-12 py-4 text-left hover:bg-light-choco" onClick={props.onclick}>
+      <button
+        type="button"
+        className="w-full px-12 py-5 text-left hover:bg-light-choco"
+        onClick={props.onclick}
+      >
         {props.children}
       </button>
     </li>
