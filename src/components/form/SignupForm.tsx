@@ -13,9 +13,11 @@ import {
 import {
   RegisterData,
   fetchSignUp,
+  fetchValidCompanyNumber,
   fetchValidUserName,
   getSignupState,
   resetAll,
+  resetCompany,
   resetName,
 } from '@store/slice/signupSlice';
 import { CommonButton } from '@components/button/CommonButton';
@@ -157,12 +159,34 @@ const SignupForm = () => {
   };
 
   // 사업자등록번호 검증
-  const checkCompanyNumberValid = () => {};
+  const checkCompanyNumberValid = (num: string) => {
+    dispatch(fetchValidCompanyNumber(num));
+  };
 
-  const onChangeCompanyNumber = () => {};
+  const onChangeCompanyNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (companyNumberStatus !== 'nothing') dispatch(resetCompany());
+    else {
+      const { name, value } = event.target;
+      const newValue = limitLength(value, 10).replace(/[^0-9]/g, '');
+      const message = '사업자등록번호는 숫자 10자리로 이루어져 있어야 합니다.';
+      setSellerValues({ ...sellerValues, [name]: newValue });
+      if (newValue.length > 0 && newValue.length < 10) {
+        setErrorValues({ ...errorValues, [name]: message });
+        setOnCompanyNumberValidButton(false);
+      } else if (newValue.length === 0) {
+        setErrorValues({ ...errorValues, [name]: '' });
+        setOnCompanyNumberValidButton(false);
+      } else {
+        setErrorValues({ ...errorValues, [name]: '' });
+        setOnCompanyNumberValidButton(true);
+      }
+    }
+  };
 
   // 스토어 이름
-  const onChangeStoreName = () => {};
+  const onChangeStoreName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSellerValues({ ...sellerValues, ['storeName']: event.target.value });
+  };
 
   // 약관동의 체크
   const onChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -254,9 +278,19 @@ const SignupForm = () => {
                 buttonValue="인증"
                 onbutton={onCompanyNumberValidButton}
                 inputValue={sellerValues.companyNumber}
-                error={''}
+                error={companyNumberMessage || errorValues.companyNumber}
+                valid={companyNumberStatus === 'success'}
+                labelClassName="w-full pt-10"
+                inputClassName="flex-grow"
               />
-              <CommonLabelInput label="스토어 이름" name="storeName" type="text" />
+              <CommonLabelInput
+                label="스토어 이름"
+                name="storeName"
+                type="text"
+                onChange={onChangeStoreName}
+                value={sellerValues.storeName}
+                valid={!!sellerValues.storeName}
+              />
             </>
           )}
         </fieldset>
