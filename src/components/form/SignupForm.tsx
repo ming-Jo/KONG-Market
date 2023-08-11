@@ -184,7 +184,9 @@ const SignupForm = () => {
   };
 
   // 스토어 이름
-  const onChangeStoreName = () => {};
+  const onChangeStoreName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSellerValues({ ...sellerValues, ['storeName']: event.target.value });
+  };
 
   // 약관동의 체크
   const onChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -281,7 +283,14 @@ const SignupForm = () => {
                 labelClassName="w-full pt-10"
                 inputClassName="flex-grow"
               />
-              <CommonLabelInput label="스토어 이름" name="storeName" type="text" />
+              <CommonLabelInput
+                label="스토어 이름"
+                name="storeName"
+                type="text"
+                onChange={onChangeStoreName}
+                value={sellerValues.storeName}
+                valid={!!sellerValues.storeName}
+              />
             </>
           )}
         </fieldset>
