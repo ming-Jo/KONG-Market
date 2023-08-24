@@ -4,30 +4,20 @@ import { RootState } from '@store/store';
 interface ModalProps {
   isOpen: boolean;
   content: string;
-  buttonValue: {
-    yes: string;
-    no: string;
-  };
 }
 
 const initialState: ModalProps = {
   isOpen: false,
   content: '',
-  buttonValue: {
-    yes: '예',
-    no: '아니오',
-  },
 };
 
 export const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
+    resetModal: () => initialState,
     openModal: (state) => {
       state.isOpen = true;
-      // if (action.payload === "예") {
-      //   state.buttonValue;
-      // }
     },
     closeModal: (state) => {
       state.isOpen = false;
@@ -36,3 +26,4 @@ export const modalSlice = createSlice({
 });
 
 export const modalIsOpenState = (state: RootState) => state.modal.isOpen;
+export const { openModal, closeModal } = modalSlice.actions;
